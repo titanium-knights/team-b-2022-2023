@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.util;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -63,7 +62,7 @@ public class MecanumDrive {
         }
 
         fl.setPower(arr[0]);
-        fr.setPower(arr[1]*1.1);
+        fr.setPower(arr[1]);
         bl.setPower(arr[2]);
         br.setPower(arr[3]);
     }
