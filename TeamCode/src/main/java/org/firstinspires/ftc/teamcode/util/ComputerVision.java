@@ -1,9 +1,49 @@
 package org.firstinspires.ftc.teamcode.util;
 
-public class ComputerVision {
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-    // GREEN
-    // PINK
-    // ORANGE
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.opencv.core.Mat;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvPipeline;
+import org.openftc.easyopencv.OpenCvWebcam;
 
+class ComputerVisionPipeline extends OpenCvPipeline {
+
+    @Override
+    public Mat processFrame(Mat input) {
+        // TODO: add code to detect color in frame
+        return input;
+    }
+}
+
+public class ComputerVision extends LinearOpMode {
+    OpenCvWebcam webcam;
+
+    @Override
+    public void runOpMode() {
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
+
+        webcam.setPipeline(new ComputerVisionPipeline());
+
+        webcam.setMillisecondsPermissionTimeout(2500);
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+
+            @Override
+            public void onOpened() {
+                telemetry.addLine("camera has opened");
+                telemetry.update();
+
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+                telemetry.addLine("camera is not opening");
+                telemetry.update();
+            }
+        });
+    }
 }
