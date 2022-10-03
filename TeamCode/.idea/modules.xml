@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/348326177/team-b-2022-2023.iml" filepath="$PROJECT_DIR$/.idea/modules/348326177/team-b-2022-2023.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.iml" filepath="$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/1413135167/team-b-2022-2023.FtcRobotController.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.iml" filepath="$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.main.iml" filepath="$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/team-b-2022-2023.TeamCode.unitTest.iml" />
+    </modules>
+  </component>
+</project>
