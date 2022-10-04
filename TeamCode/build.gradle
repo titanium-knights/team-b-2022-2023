@@ -22,4 +22,12 @@ android {
 dependencies {
     implementation project(':FtcRobotController')
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
+    implementation 'org.openftc:easyopencv:1.5.2'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.7.1'
+}
+
+task prepareKotlinBuildScriptModel {
 }
