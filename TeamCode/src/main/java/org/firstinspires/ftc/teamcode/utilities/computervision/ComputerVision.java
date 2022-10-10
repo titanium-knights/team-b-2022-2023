@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.util.computervision;
+package org.firstinspires.ftc.teamcode.utilities.computervision;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.util.computervision.pipelines.ComputerVisionPipeline;
+import org.firstinspires.ftc.teamcode.utilities.computervision.pipelines.ComputerVisionPipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
