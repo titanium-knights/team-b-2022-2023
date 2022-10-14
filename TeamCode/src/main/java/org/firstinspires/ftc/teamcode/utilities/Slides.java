@@ -9,7 +9,7 @@ public class Slides {
     DcMotor slideMotor;
 
     public Slides(HardwareMap hmap){
-        this.slideMotor = hmap.dcMotor.get(CONFIG.TURNTABLE);
+        this.slideMotor = hmap.dcMotor.get(CONFIG.SLIDE);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideMotor.setZeroPowerBehavior(BRAKE);
