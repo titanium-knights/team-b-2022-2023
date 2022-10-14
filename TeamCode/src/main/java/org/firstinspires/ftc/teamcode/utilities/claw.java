@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.util;
+package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -18,11 +18,11 @@ public class claw {
     }
 
     public void close() {
-        spin(-.6);
+        spin(-.1);
     }
 
     public void open() {
-        spin(.7);
+        spin(.1);
     }
 
 }
