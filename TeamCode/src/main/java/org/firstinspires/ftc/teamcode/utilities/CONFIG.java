@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.util;
+package org.firstinspires.ftc.teamcode.utilities;
 
 // adjust to current configuration (2022-2023)
 

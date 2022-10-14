@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.util.computervision.pipelines;
+package org.firstinspires.ftc.teamcode.utilities.computervision.pipelines;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
