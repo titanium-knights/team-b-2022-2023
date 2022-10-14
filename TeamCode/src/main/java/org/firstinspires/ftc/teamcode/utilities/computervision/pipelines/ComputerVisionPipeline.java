@@ -19,15 +19,11 @@ public class ComputerVisionPipeline extends OpenCvPipeline {
             }
         }
 
-        if(sum>0) {
-            return true;
-        }
-        return false;
+        return sum > 0;
     }
 
     @Override
     public Mat processFrame(Mat input) {
-        // TODO: add code to detect color in frame
         Mat mat = new Mat();
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
 
@@ -46,7 +42,7 @@ public class ComputerVisionPipeline extends OpenCvPipeline {
             Mat res = new Mat();
             if(i==0) {
                 if(colorDetected(mat, yellow_boundary, res)) {
-                    // color_detected = "yellow";
+                     color_detected = "yellow";
                     return res;
                 }
             } else if(i==1) {
