@@ -9,6 +9,9 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 
 public class ComputerVisionPipeline extends OpenCvPipeline {
+
+    public String color_detected = "";
+
     public boolean colorDetected(Mat input, ArrayList<Scalar> boundary, Mat res) {
         Core.inRange(input, boundary.get(0), boundary.get(1), res);
 
@@ -38,7 +41,6 @@ public class ComputerVisionPipeline extends OpenCvPipeline {
         pink_boundary.add(new Scalar(179, 255, 255));
 
         for(int i =0; i < 3; i++) {
-            String color_detected = "";
             Mat res = new Mat();
             if(i==0) {
                 if(colorDetected(mat, yellow_boundary, res)) {

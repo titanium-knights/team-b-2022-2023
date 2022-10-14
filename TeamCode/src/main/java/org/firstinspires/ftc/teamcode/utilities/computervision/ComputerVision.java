@@ -10,7 +10,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 public class ComputerVision extends LinearOpMode {
-    OpenCvWebcam webcam;
+    public OpenCvWebcam webcam;
 
     @Override
     public void runOpMode() {
