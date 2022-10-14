@@ -11,12 +11,13 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
 public class ComputerVision extends LinearOpMode {
     public OpenCvWebcam webcam;
+    public ComputerVisionPipeline cvp = new ComputerVisionPipeline();
 
     @Override
     public void runOpMode() {
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
 
-        webcam.setPipeline(new ComputerVisionPipeline());
+        webcam.setPipeline(cvp);
 
         webcam.setMillisecondsPermissionTimeout(2500);
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {

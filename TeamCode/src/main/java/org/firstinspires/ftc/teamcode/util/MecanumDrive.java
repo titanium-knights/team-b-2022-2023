@@ -105,9 +105,12 @@ public class MecanumDrive {
         // its relative ratios
         // finding the power with maximum magnitude and then dividing all the powers
         // by that value will ensure that the maximum magnitude of power will be 1
-        double max = Math.max(
-                Math.abs(Arrays.stream(power).max().getAsDouble()),
-                Math.abs(Arrays.stream(power).min().getAsDouble()));
+        double max = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            max = Math.max(
+                    Math.abs(Arrays.stream(power).max().getAsDouble()),
+                    Math.abs(Arrays.stream(power).min().getAsDouble()));
+        }
         if (max > 1) {
             for (int i = 0; i < 4; i++) {
                 power[i] /= max;

@@ -3,18 +3,18 @@ package org.firstinspires.ftc.teamcode.utilities;
 // adjust to current configuration (2022-2023)
 
 public class CONFIG {
-    public static String CLAW_L = "leftservo";
-    public static String CLAW_R = "rightservo";
-    public static String FRONTLEFT = "fl";
-    public static String FRONTRIGHT = "fr";
-    public static String BACKLEFT = "bl";
-    public static String BACKRIGHT = "br";
+    public static String CLAW_L = "leftservo"; //using this
+    public static String CLAW_R = "rightservo"; //using this
+    public static String FRONTLEFT = "fl"; //using this
+    public static String FRONTRIGHT = "fr"; //using this
+    public static String BACKLEFT = "bl"; //using this
+    public static String BACKRIGHT = "br"; //using this
     public static String FRONTDIST = "front";
     public static String BACKDIST = "back";
     public static String LEFTDIST = "left";
     public static String RIGHTDIST = "right";
     public static String ARMMOTOR = "am";
-    public static String SLIDE = "slide";
+    public static String SLIDE = "slide"; //using this
     public static String ANGLE = "angle";
     public static double centerOfRobit2BackDistance = 8; //inches
     public static double centerOfRobit2LeftDistance = 8; //inches
@@ -23,9 +23,9 @@ public class CONFIG {
     public static String PUSH = "push";
     public static String INTAKE = "intake";
     public static String BOTTOMROLLER = "bottomroller";
-    public static String LEFTVERTICAL = FRONTLEFT;
-    public static String RIGHTVERTICAL = BACKRIGHT;
-    public static String HORIZONTAL = FRONTRIGHT;
+    public static String LEFTVERTICAL = FRONTLEFT; //using this
+    public static String RIGHTVERTICAL = BACKRIGHT; //using this
+    public static String HORIZONTAL = FRONTRIGHT; //using this
     public static String WEBCAM = "Webcam 1";
     public static double COUNTS_PER_INCH = 307.699557;
     public static double COUNTS_PER_REVOLUTION =  537.6;

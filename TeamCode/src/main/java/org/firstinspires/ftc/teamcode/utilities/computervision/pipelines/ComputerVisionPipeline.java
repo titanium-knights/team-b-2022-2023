@@ -10,7 +10,11 @@ import java.util.ArrayList;
 
 public class ComputerVisionPipeline extends OpenCvPipeline {
 
-    public String color_detected = "";
+    public static String color_detected = "";
+
+    public String getColor() {
+        return color_detected;
+    }
 
     public boolean colorDetected(Mat input, ArrayList<Scalar> boundary, Mat res) {
         Core.inRange(input, boundary.get(0), boundary.get(1), res);

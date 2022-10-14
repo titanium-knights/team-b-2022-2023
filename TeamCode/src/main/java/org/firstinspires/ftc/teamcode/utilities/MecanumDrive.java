@@ -34,7 +34,7 @@ public class MecanumDrive {
 
         // dot of fl and br
         double dot_fl = dot(Objects.requireNonNull(directions.get(fl)), new double[]{x, y}) + turn;
-        double dot_fr = (dot(Objects.requireNonNull(directions.get(fr)), new double[]{x, y}) + turn)*1.1;
+        double dot_fr = (dot(Objects.requireNonNull(directions.get(fr)), new double[]{x, y}) + turn);
         double dot_bl = dot(Objects.requireNonNull(directions.get(fr)), new double[]{x, y}) - turn;
         double dot_br = dot(Objects.requireNonNull(directions.get(fl)), new double[]{x, y}) - turn;
 
