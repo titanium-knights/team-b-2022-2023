@@ -21,19 +21,21 @@ public class Slides {
 
     public int getEncoderPosition() {return slideMotor.getCurrentPosition();}
 
-    //right trigger
-    public void up(int mode){
-        //CHANGE
-        slideMotor.setTargetPosition(0);
+    //left trigger
+    public void topPosition() throws InterruptedException {
+        slideMotor.setTargetPosition(90);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideMotor.setPower(0.3);
+        Thread.sleep(1700); // 1.7 seconds
         slideMotor.setPower(0);
     }
 
-    //left trigger
-    public void down(int mode){
-        //CHANGE
-        slideMotor.setTargetPosition(0);
+    //right trigger
+    public void downFromTop() throws InterruptedException {
+        slideMotor.setTargetPosition(-90);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideMotor.setPower(.19);
+        Thread.sleep(1700); // 1.7 seconds
         slideMotor.setPower(0);
     }
 

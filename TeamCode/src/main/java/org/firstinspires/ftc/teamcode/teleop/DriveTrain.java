@@ -33,8 +33,14 @@ public class DriveTrain extends LinearOpMode {
             drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
 
             // Slides
-            slide.spin(gamepad1.left_trigger/10);
-            slide.spin(-gamepad1.right_trigger/10);
+            if (gamepad1.left_trigger > 0) {
+                telemetry.addData("left trigger", "slides up");
+                slide.topPosition();
+            }
+            else if (gamepad1.right_trigger > 0) {
+                telemetry.addData("right trigger", "slides down");
+                slide.downFromTop();
+            }
 
             //Claw
             if (gamepad1.left_bumper)
