@@ -18,11 +18,11 @@ public class Claw {
     }
 
     public void close() {
-        spin(-.5);
+        spin(.7);
     }
 
     public void open() {
-        spin(.5);
+        spin(-.2);
     }
 
 }

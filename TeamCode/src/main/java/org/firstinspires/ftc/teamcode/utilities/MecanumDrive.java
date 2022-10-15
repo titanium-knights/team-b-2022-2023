@@ -63,7 +63,7 @@ public class MecanumDrive {
 
         fl.setPower(arr[0]);
         fr.setPower(arr[1]);
-        bl.setPower(arr[2]*.8);
+        bl.setPower(arr[2]*.5);
         br.setPower(arr[3]);
     }
 }

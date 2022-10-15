@@ -35,18 +35,19 @@ public class DriveTrain extends LinearOpMode {
             // Slides
             if (gamepad1.left_trigger > 0) {
                 telemetry.addData("left trigger", "slides up");
-                slide.topPosition();
+                slide.downFromTop();
             }
             else if (gamepad1.right_trigger > 0) {
                 telemetry.addData("right trigger", "slides down");
-                slide.downFromTop();
+                slide.topPosition();
             }
 
             //Claw
             if (gamepad1.left_bumper)
-                claw.open();
-            if (gamepad1.right_bumper)
                 claw.close();
+
+            if (gamepad1.right_bumper)
+                claw.open();
 
 
         }
