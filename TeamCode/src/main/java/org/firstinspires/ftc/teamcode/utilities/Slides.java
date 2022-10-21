@@ -13,8 +13,8 @@ public class Slides {
     int initpos;
     int pos;
 
-    //unknown
-    int maxheight = 0;
+    //unknown, values go into negative, 0 > lowheight > midheight > maxheight
+    int maxheight = -2500;
     int midheight = 0;
     int lowheight = 0;
 
@@ -30,8 +30,9 @@ public class Slides {
     }
 
     public void stop(){
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setPower(0);
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
     public int getEncoder(){
@@ -49,7 +50,7 @@ public class Slides {
     public void runToPosition(){
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slideMotor.setPower(0.3);
-        while (slideMotor.isBusy() && pos > initpos && pos < maxheight) pos = getEncoder();
+        while (slideMotor.isBusy()) pos = getEncoder();
         slideMotor.setPower(0);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
@@ -88,9 +89,13 @@ public class Slides {
     // to find min/max, true = up, false = down
     public void manual(boolean direction){
         if (slideMotor.isBusy()) return;
+        int newpos = pos + (direction ? -1 : 1) * 90;
+        if (newpos <= initpos && newpos >= maxheight){
+            setTarget(newpos);
+            runToPosition();
+        }
 
-        setTarget(pos + (direction ? -1 : 1) * 90);
-        runToPosition();
+
     }
 
 
