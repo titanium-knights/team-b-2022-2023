@@ -58,40 +58,25 @@ public class DriveTrain extends LinearOpMode {
 
             // Slides
             //Manual control, up
-
-//            telemetry.addData("motors:", String.format("%f %f %f %f", fl.getPower(), fr.getPower(), bl.getPower(), br.getPower()));
-//            telemetry.update();
-
             if (gamepad1.left_trigger > 0) {
-                telemetry.addData("encoder preman", slide.getEncoder());
-                telemetry.update();
+                //comment one or the other.
+                //first - 100ms, second - while held
                 slide.pSlideUp();
-
-
-
-                /*
-                telemetry.addData("encoder preman", slide.getEncoder());
-                telemetry.addData("left trigger", "slides down");
-                slide.manual(true);
+                slide.upHold();
                 telemetry.addData("encoder postman", slide.getEncoder());
                 telemetry.update();
-
-                 */
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
-                telemetry.addData("encoder preman", slide.getEncoder());
-
+                //same as above, reversed
                 slide.pSlideDown();
-                telemetry.update();
-                /*
-                telemetry.addData("encoder preman", slide.getEncoder());
-                telemetry.addData("right trigger", "slides down");
-                slide.manual(false);
+                slide.downHold();
                 telemetry.addData("encoder postman", slide.getEncoder());
                 telemetry.update();
 
-                 */
+            } else{
+                //if using pSlide, comment out.
+                slide.stop();
             }
 
 
