@@ -61,17 +61,17 @@ public class DriveTrain extends LinearOpMode {
             if (gamepad1.left_trigger > 0) {
                 //comment one or the other.
                 //first - 100ms, second - while held
-                slide.pSlideUp();
+                //slide.pSlideUp();
                 slide.upHold();
-                telemetry.addData("encoder postman", slide.getEncoder());
+                telemetry.addData("encoder postup", slide.getEncoder());
                 telemetry.update();
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
                 //same as above, reversed
-                slide.pSlideDown();
+                //slide.pSlideDown();
                 slide.downHold();
-                telemetry.addData("encoder postman", slide.getEncoder());
+                telemetry.addData("encoder postdown", slide.getEncoder());
                 telemetry.update();
 
             } else{
@@ -104,7 +104,7 @@ public class DriveTrain extends LinearOpMode {
 
 
 
-            if (gamepad1.b) slide.stop();
+            if (gamepad1.a) slide.stop();
 
             //Claw
             if (gamepad1.left_bumper)
