@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.utilities;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
 //NEGATIVE IS UP
+import static java.lang.Thread.sleep;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -12,9 +14,10 @@ public class Slides {
     //position at initial
     int initpos;
     int pos;
+    int spindir;
 
     //unknown, values go into negative, 0 > lowheight > midheight > maxheight
-    int maxheight = -2500;
+    int maxheight = -7600;
     int midheight = 0;
     int lowheight = 0;
 
@@ -22,7 +25,8 @@ public class Slides {
 
         this.slideMotor = hmap.dcMotor.get(CONFIG.SLIDE);
         this.initpos = this.pos = 0;
-
+        //0 - stat, 1 - up, 2 - down
+        this.spindir = 0;
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setZeroPowerBehavior(BRAKE);
@@ -30,10 +34,12 @@ public class Slides {
     }
 
     public void stop(){
-        slideMotor.setPower(0);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotor.setPower(0);
 
     }
+    public int getPower() { return slideMotor.getCurrentPosition();}
+
 
     public int getEncoder(){
         return slideMotor.getCurrentPosition();
@@ -47,9 +53,24 @@ public class Slides {
         slideMotor.setTargetPosition(target);
     }
 
+    public void pSlideUp() throws InterruptedException {
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotor.setPower(-1);
+        sleep(100);
+        slideMotor.setPower(0);
+    }
+    public void pSlideDown() throws InterruptedException {
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotor.setPower(1);
+        sleep(100);
+        slideMotor.setPower(0);
+    }
+
+
+
     public void runToPosition(){
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slideMotor.setPower(0.3);
+        slideMotor.setPower(0.8);
         while (slideMotor.isBusy()) pos = getEncoder();
         slideMotor.setPower(0);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -57,7 +78,7 @@ public class Slides {
 
     // positive target is up, negative is down
     public int move(int mode){
-        if (slideMotor.isBusy()) return -1;
+        if (slideMotor.isBusy()) return -2;
 
         int target;
 
@@ -88,12 +109,16 @@ public class Slides {
 
     // to find min/max, true = up, false = down
     public void manual(boolean direction){
-        if (slideMotor.isBusy()) return;
-        int newpos = pos + (direction ? -1 : 1) * 90;
-        if (newpos <= initpos && newpos >= maxheight){
+        //if ((direction ? 1 : 2) == spindir && slideMotor.isBusy()) return;
+        spindir = direction ? 1 : 2;
+        int newpos = pos + (direction ? -1 : 1) * 300;
+        setTarget(newpos);
+        runToPosition();
+        /*if (newpos <= initpos && newpos >= maxheight){
             setTarget(newpos);
             runToPosition();
-        }
+        }*/
+        spindir = 0;
 
 
     }
