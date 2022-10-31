@@ -39,6 +39,8 @@ public class DriveTrain extends LinearOpMode {
 
         waitForStart();
 
+
+
         while (opModeIsActive()) {
 
 
@@ -69,7 +71,7 @@ public class DriveTrain extends LinearOpMode {
             if (gamepad1.dpad_down) slide.tozero();
             if (gamepad1.dpad_left) slide.low();
             if(gamepad1.dpad_up) slide.middle();
-            if (counter % 100 == 0) telemetry.clear();
+            if (!slide.isBusy()) slide.stop();
 
             if (gamepad1.a) {
                 slide.reset();
@@ -77,11 +79,11 @@ public class DriveTrain extends LinearOpMode {
             }
 
             //Claw
-            if (gamepad1.left_bumper)
-                claw.close();
+            if (gamepad1.left_bumper) claw.close();
 
-            if (gamepad1.right_bumper)
-                claw.open();
+            if (gamepad1.right_bumper) claw.open();
+
+            if (counter % 100 == 0) telemetry.clear();
 
         }
     }

@@ -17,7 +17,7 @@ public class OctoberAuto extends LinearOpMode {
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
         Claw claw = new Claw(hardwareMap);
-        claw.open();
+        claw.close();
 
         robot.forward();
         /*
