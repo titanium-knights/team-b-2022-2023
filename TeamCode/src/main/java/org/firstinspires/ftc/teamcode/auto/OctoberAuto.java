@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.util.MecanumDrive;
+import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 import org.firstinspires.ftc.teamcode.utilities.computervision.ComputerVision;
 import org.firstinspires.ftc.teamcode.utilities.computervision.pipelines.ComputerVisionPipeline;
 
 import java.util.Objects;
+import org.firstinspires.ftc.teamcode.utilities.Claw;
 
 @Autonomous(name = "CV_AUTO")
 public class OctoberAuto extends LinearOpMode {
@@ -15,7 +16,11 @@ public class OctoberAuto extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
+        Claw claw = new Claw(hardwareMap);
+        claw.open();
 
+        robot.forward();
+        /*
         ComputerVision cv = new ComputerVision();
         cv.runOpMode();
 //        cv.webcam.
@@ -35,5 +40,7 @@ public class OctoberAuto extends LinearOpMode {
         else if (color.equals("pink")) {
             robot.setPower(1,-1,0);
         }
+
+         */
     }
 }

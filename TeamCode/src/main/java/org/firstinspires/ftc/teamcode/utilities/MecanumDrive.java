@@ -34,13 +34,25 @@ public class MecanumDrive {
 
     public static DcMotor fl, fr, bl, br;
 
+
+
     public int getEncoder(){
-
-
         return bl.getCurrentPosition();
     }
 
     public static HashMap<DcMotor, double[]> directions = new HashMap<>();
+
+    public void forward () throws InterruptedException {
+        fl.setPower(1);
+        br.setPower(-1.7);
+        fr.setPower(-1.5);
+        bl.setPower(0.45);
+        sleep(800);
+        fl.setPower(0);
+        br.setPower(0);
+        fr.setPower(0);
+        bl.setPower(0);
+    }
 
     public void move(double x, double y, double turn) {
 
@@ -55,7 +67,7 @@ public class MecanumDrive {
         br.setPower(-1.7*dot_br / max);
 
         fr.setPower(1.5*dot_fr / max);
-        bl.setPower(-0.3 *dot_bl / max);
+        bl.setPower(-0.35 *dot_bl / max);
     }
 
     // Each double[] will be a direction vector of length two

@@ -15,9 +15,9 @@ public class Slides {
     int state;
 
     //unknown, values go into negative, 0 > lowheight > midheight > maxheight
-    int maxheight = -7600;
-    int midheight = 0;
-    int lowheight = 0;
+    int maxheight = -8000;
+    int midheight = -6847;
+    int lowheight = -3800;
 
     public Slides(HardwareMap hmap){
 
@@ -39,6 +39,10 @@ public class Slides {
 
     }
 
+    public void setMode() {slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);}
+
+    public boolean isBusy() {return slideMotor.isBusy(); }
+
     public double getPower() { return slideMotor.getPower();}
 
     public int getEncoder(){
@@ -53,6 +57,74 @@ public class Slides {
         slideMotor.setTargetPosition(target);
     }
 
+    public void reset(){
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pos = 0;
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void runToPosition(){
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideMotor.setPower(4);
+        while(slideMotor.isBusy()) pos = getEncoder();
+        slideMotor.setPower(0);
+        setMode();
+    }
+    public void tozero(){
+        setTarget(-200);
+        runToPosition();
+        pos = getEncoder();
+    }
+    public void low(){
+        setTarget(lowheight);
+        runToPosition();
+        pos = getEncoder();
+    }
+
+    public void middle(){
+        setTarget(midheight);
+        runToPosition();
+        pos = getEncoder();
+    }
+
+    public void upHold(){
+        if (state == 1 && pos <= midheight + 1500){
+            slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            slideMotor.setPower(-0.75);
+            pos = getEncoder();
+        }
+        if (state == 1 || pos <= maxheight) return;
+        state = 1;
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotor.setPower(-2);
+        pos = getEncoder();
+    }
+
+    public void downHold(boolean encoder){
+        if (!encoder){
+            slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            slideMotor.setPower(1.5);
+            return;
+        }
+        if (state == 2 && pos >= -1800){
+            slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            slideMotor.setPower(0.5);
+            pos = getEncoder();
+            return;
+        }
+        if (state == 2 || pos >= -200) return;
+
+        state = 2;
+        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotor.setPower(3);
+        pos = getEncoder();
+    }
+
+
+
+
+
+    // time-based / jerks
     public void pSlideUp() throws InterruptedException {
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setPower(-1);
@@ -67,61 +139,6 @@ public class Slides {
         sleep(100);
         slideMotor.setPower(0);
         pos = getEncoder();
-    }
-
-    public void upHold(){
-        if (state == 1 || pos <= maxheight) return;
-        state = 1;
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setPower(-1);
-        pos = getEncoder();
-    }
-
-    public void downHold(){
-        if (state == 2 || pos >= 0) return;
-        state = 2;
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setPower(1);
-        pos = getEncoder();
-    }
-
-
-
-    public void runToPosition(){
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slideMotor.setPower(0.8);
-        while (slideMotor.isBusy()) pos = getEncoder();
-        slideMotor.setPower(0);
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
-    // positive target is up, negative is down
-    public int move(int mode){
-        if (slideMotor.isBusy()) return -2;
-
-        int target;
-
-        switch(mode){
-            case 0:
-                target = 0;
-                break;
-            case 1:
-                target = lowheight;
-                break;
-            case 2:
-                target = midheight;
-                break;
-            case 3:
-                target = maxheight;
-                break;
-            default:
-                target = 0;
-        }
-
-        setTarget(target);
-        runToPosition();
-
-        return mode;
     }
 
 
