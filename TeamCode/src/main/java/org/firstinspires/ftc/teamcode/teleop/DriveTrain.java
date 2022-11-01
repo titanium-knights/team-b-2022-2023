@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 
+import static java.lang.Thread.sleep;
+
+import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -14,15 +18,14 @@ import org.firstinspires.ftc.teamcode.utilities.Slides;
 @TeleOp(name="DriveTrain Teleop")
 public class DriveTrain extends LinearOpMode {
     public static DcMotor fl, fr, bl, br;
+    int maxheight = -8000;
+    int midheight = -6847;
+    int lowheight = -3800;
 
-    public void initialize(){
-        MecanumDrive drive = new MecanumDrive(hardwareMap);
-        Slides slide = new Slides(hardwareMap);
-        Claw claw = new Claw(hardwareMap);
-    }
 
     @Override
     public void runOpMode() throws InterruptedException {
+
         MecanumDrive drive = new MecanumDrive(hardwareMap);
         Slides slide = new Slides(hardwareMap);
         Claw claw = new Claw(hardwareMap);
@@ -31,61 +34,56 @@ public class DriveTrain extends LinearOpMode {
         //mecanum
         boolean slowMode = false;
         //slide preset: 0 - orig, 1 - low, 2 - med, 3 - high
-        int mode = 0;
-        int action;
-
+        int counter = 0;
+        boolean encoderset = false;
 
         waitForStart();
 
+
+
         while (opModeIsActive()) {
-            gamepad1.rumble(1000);
+
+
 
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
-
             drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
 
             // Slides
             //Manual control, up
             if (gamepad1.left_trigger > 0) {
-                telemetry.addData("encoder preman", slide.getEncoder());
-                telemetry.addData("left trigger", "slides down");
-                slide.manual(true);
-                telemetry.addData("encoder postman", slide.getEncoder());
+                slide.upHold();
+                telemetry.addData("encoder postup", slide.getEncoder());
                 telemetry.update();
+                ++counter;
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
-                telemetry.addData("encoder preman", slide.getEncoder());
-                telemetry.addData("right trigger", "slides down");
-                slide.manual(false);
-                telemetry.addData("encoder postman", slide.getEncoder());
+                slide.downHold(encoderset);
+                telemetry.addData("encoder postdown", slide.getEncoder());
                 telemetry.update();
+                ++counter;
+
+            } else{
+                slide.stop();
             }
 
-            //height control
-            action = -1;
-            telemetry.addData("encoder prepreset", slide.getEncoder());
-            if (gamepad1.dpad_down) action = slide.move(0);
-            if (gamepad1.dpad_left) action = slide.move(1);
-            if (gamepad1.dpad_up) action = slide.move(2);
-            if (gamepad1.dpad_right) action = slide.move(3);
-            if (action > -1){
-                telemetry.addData("presetval", action);
-                telemetry.addData("encoder postpreset", slide.getEncoder());
+            if (gamepad1.dpad_down) slide.tozero();
+            if (gamepad1.dpad_left) slide.low();
+            if(gamepad1.dpad_up) slide.middle();
+            if (!slide.isBusy()) slide.stop();
+
+            if (gamepad1.a) {
+                slide.reset();
+                encoderset = true;
             }
-            telemetry.update();
-
-            if (gamepad1.b) slide.stop();
-
 
             //Claw
-            if (gamepad1.left_bumper)
-                claw.close();
+            if (gamepad1.left_bumper) claw.close();
 
-            if (gamepad1.right_bumper)
-                claw.open();
+            if (gamepad1.right_bumper) claw.open();
 
+            if (counter % 100 == 0) telemetry.clear();
 
         }
     }
