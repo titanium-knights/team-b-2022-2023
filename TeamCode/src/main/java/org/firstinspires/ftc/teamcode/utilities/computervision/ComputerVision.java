@@ -8,6 +8,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
+import static org.firstinspires.ftc.teamcode.utilities.CONFIG.WEBCAM;
 
 public class ComputerVision extends LinearOpMode {
     public OpenCvWebcam webcam;
@@ -15,7 +16,7 @@ public class ComputerVision extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, WEBCAM));
 
         webcam.setPipeline(cvp);
 
