@@ -23,14 +23,16 @@ public class OctoberAuto extends LinearOpMode {
         Claw claw = new Claw(hardwareMap);
         claw.close();
 
-        robot.forward();
-        ComputerVision cv = new ComputerVision();
-        cv.runOpMode();
+//        robot.forward();
+//        ComputerVision cv = new ComputerVision();
+//        cv.runOpMode();
 //        cv.webcam.
-        String color = ComputerVisionPipeline.color_detected;
+//        String color = ComputerVisionPipeline.color_detected;
 
         // time-auton written by Gabe
         // move to spot 1
+
+        String color = "green";
         if (color.equals("green")) {
 //            SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 //
@@ -45,11 +47,11 @@ public class OctoberAuto extends LinearOpMode {
 //
 //            drive.followTrajectory(northTrajectory);
 
-            robot.move(-0.1,0,0);
-            sleep(1);
+            robot.move(-1,0,0);
+            sleep(800);
             robot.move(0,0,0);
-            robot.move(0,.2,0);
-            sleep(1);
+            robot.move(0,2,0);
+            sleep(800);
             robot.move(0,0,0);
         }
         // move to spot 2
@@ -66,8 +68,8 @@ public class OctoberAuto extends LinearOpMode {
 //
 //            drive.followTrajectory(middleTrajectory);
 
-            robot.move(0,.2,0);
-            sleep(1);
+            robot.move(0,2,0);
+            sleep(800);
             robot.move(0,0,0);
         }
 
@@ -86,13 +88,12 @@ public class OctoberAuto extends LinearOpMode {
 //
 //            drive.followTrajectory(southTrajectory);
 
-            robot.move(0.1,0,0);
-            sleep(1);
+            robot.move(1,0,0);
+            sleep(800);
             robot.move(0,0,0);
-            robot.move(0,.2,0);
-            sleep(1);
+            robot.move(0,2,0);
+            sleep(800);
             robot.move(0,0,0);
         }
-
     }
 }

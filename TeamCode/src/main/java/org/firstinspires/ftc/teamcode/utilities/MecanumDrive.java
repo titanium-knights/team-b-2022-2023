@@ -63,11 +63,11 @@ public class MecanumDrive {
         double dot_br = dot(Objects.requireNonNull(directions.get(br)), new double[]{x, y}) - turn;
 
         double max = Math.max(1, Math.max(Math.max(Math.abs(dot_fl), Math.abs(dot_fr)), Math.max(Math.abs(dot_bl), Math.abs(dot_br))));
-        fl.setPower(dot_fl / max);
-        br.setPower(-1.7*dot_br / max);
+        fl.setPower(.8*dot_fl / max);
+        br.setPower(-1*dot_br / max);
 
-        fr.setPower(1.5*dot_fr / max);
-        bl.setPower(-0.35 *dot_bl / max);
+        fr.setPower(1.15*dot_fr / max);
+        bl.setPower(-.8*dot_bl / max);
     }
 
     // Each double[] will be a direction vector of length two
