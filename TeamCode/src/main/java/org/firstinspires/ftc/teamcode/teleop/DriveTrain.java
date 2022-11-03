@@ -2,14 +2,10 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 
 import static java.lang.Thread.sleep;
-
 import android.annotation.SuppressLint;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.Claw;
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
@@ -39,12 +35,7 @@ public class DriveTrain extends LinearOpMode {
 
         waitForStart();
 
-
-
         while (opModeIsActive()) {
-
-
-
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
             drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
