@@ -21,7 +21,6 @@ public class Slides {
 
     public Slides(HardwareMap hmap){
         this.slideMotor = hmap.dcMotor.get(CONFIG.SLIDE);
-        ///0 - stat, 1 - up, 2 - down
         this.state = this.pos = 0;
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

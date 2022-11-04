@@ -36,9 +36,6 @@ public class MecanumDrive {
 
 
 
-    public int getEncoder(){
-        return bl.getCurrentPosition();
-    }
 
     public static HashMap<DcMotor, double[]> directions = new HashMap<>();
 
