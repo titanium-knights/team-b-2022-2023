@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
+import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
+
 @Autonomous(name="ColorDetectionAuton")
 public class ColorDetection extends LinearOpMode {
     // Define a variable for our color sensor
@@ -19,6 +21,8 @@ public class ColorDetection extends LinearOpMode {
 
         // Wait for the Play button to be pressed
         waitForStart();
+
+        MecanumDrive robot = new MecanumDrive(hardwareMap);
 
         int count = 0;
         int hue_sum = 0;
@@ -40,14 +44,40 @@ public class ColorDetection extends LinearOpMode {
         telemetry.addData("Hue Avg", hue_avg);
         if(hue_avg<=120) {
             color="yellow";
-        } else if(hue_avg>120 && hue_avg<=169) {
+        } else if(hue_avg<=169) {
             color="pink";
-        } else if(hue_avg>=170) {
+        } else {
             color="blue";
         }
+
         telemetry.addData("color", color);
         telemetry.update();
 
         sleep(5000);
+
+        if (color.equals("green")) {
+            robot.move(-1,0,0);
+            sleep(800);
+            robot.move(0,0,0);
+            robot.move(0,2,0);
+            sleep(800);
+            robot.move(0,0,0);
+        }
+        // move to spot 2
+        else if (color.equals("yellow")) {
+            robot.move(0,2,0);
+            sleep(800);
+            robot.move(0,0,0);
+        }
+
+        // move to spot 3
+        else if (color.equals("pink")) {
+            robot.move(1,0,0);
+            sleep(800);
+            robot.move(0,0,0);
+            robot.move(0,2,0);
+            sleep(800);
+            robot.move(0,0,0);
+        }
     }
 }
