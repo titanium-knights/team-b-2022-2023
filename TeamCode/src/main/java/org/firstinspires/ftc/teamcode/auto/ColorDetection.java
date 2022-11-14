@@ -54,6 +54,13 @@ public class ColorDetection extends LinearOpMode {
         telemetry.update();
 
         sleep(5000);
+        robot.move (0, 1.6, 0);
+        sleep(800);
+        robot.move(0,0,0);
+
+        robot.move (0, -1.6, 0);
+        sleep(800);
+        robot.move(0,0,0);
 
         if (color.equals("green")) {
             robot.move(-1,0,0);
