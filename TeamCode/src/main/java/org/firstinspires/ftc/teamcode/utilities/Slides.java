@@ -16,7 +16,7 @@ public class Slides {
 
     //unknown, values go into negative, 0 > lowheight > midheight > maxheight
     int maxheight = -8000;
-    int midheight = -6847;
+    int midheight = -7200;
     int lowheight = -3800;
 
     public Slides(HardwareMap hmap){
@@ -56,7 +56,7 @@ public class Slides {
     }
 
     public void tozero(){
-        setTarget(-200);
+        setTarget(0);
         runToPosition();
         pos = getEncoder();
     }
@@ -69,6 +69,12 @@ public class Slides {
 
     public void middle(){
         setTarget(midheight);
+        runToPosition();
+        pos = getEncoder();
+    }
+
+    public void lower(){
+        setTarget(pos + 200);
         runToPosition();
         pos = getEncoder();
     }

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.utilities.Claw;
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 import org.firstinspires.ftc.teamcode.utilities.computervision.ComputerVision;
 import org.firstinspires.ftc.teamcode.utilities.computervision.pipelines.ComputerVisionPipeline;
@@ -13,11 +14,21 @@ public class CVParkAuton extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
-        ComputerVision cv = new ComputerVision();
+        Claw claw = new Claw(hardwareMap);
+
+        claw.close();
+        sleep(1);
+        /*
+        ComputerVision cv = new ComputerVision(hardwareMap);
         cv.runOpMode();
 
-        String color = ComputerVisionPipeline.color_detected;
 
+
+        String color = ComputerVisionPipeline.color_detected;
+        */
+        String color = "yellow";
+        telemetry.addData("Color", color);
+        telemetry.update();
         // time-auton written by Gabe
         // move to spot 1
 
@@ -45,5 +56,7 @@ public class CVParkAuton extends LinearOpMode {
             sleep(800);
             robot.move(0,0,0);
         }
+
+        //while(!gamepad1.a);
     }
 }

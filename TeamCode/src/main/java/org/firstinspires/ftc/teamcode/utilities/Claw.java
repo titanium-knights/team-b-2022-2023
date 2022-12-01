@@ -22,9 +22,9 @@ public class Claw {
         clawServo_right.setPosition(-dx);
     }
 
-
-    public void close(){clawServo_right.setPosition(0); clawServo_left.setPosition(0);}
-    public void open(){clawServo_right.setPosition(0.55); clawServo_right.setPosition(0.65);}
+    public void test() {clawServo_left.setPosition(0.5);}
+    public void close(){clawServo_right.setPosition(0.95); clawServo_left.setPosition(0.00);}
+    public void open(){clawServo_right.setPosition(0.6); clawServo_left.setPosition(0.6);}
 
 
 }

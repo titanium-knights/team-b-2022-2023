@@ -22,10 +22,10 @@ public class DriveTrain extends LinearOpMode {
     public void runOpMode(){
 
         MecanumDrive drive = new MecanumDrive(hardwareMap);
-        Slides slide = new Slides(hardwareMap);
+        /*Slides slide = new Slides(hardwareMap);
         Claw claw = new Claw(hardwareMap);
         telemetry.setAutoClear(false);
-
+    */
         //mecanum
         boolean slowMode = false;
         //telemetry resetter
@@ -34,14 +34,28 @@ public class DriveTrain extends LinearOpMode {
         boolean encoderset = false;
         //If preset is active: Reset by manual movement, or when position reached.
         boolean presetactive = false;
-        int mod = 1;
 
         waitForStart();
 
         while (opModeIsActive()) {
-            //   slowMode
+            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
+            /*if (gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
+                telemetry.addData("PositionX", gamepad1.left_stick_x);
+                telemetry.addData("PositionY", gamepad1.left_stick_y);
+                telemetry.update();
+                ++counter;
+            }
+            if (counter % 100 == 0) telemetry.clear();
+            if (gamepad1.dpad_up) drive.frontleft();
+            else if (gamepad1.dpad_down) drive.frontright();
+            else if (gamepad1.dpad_left) drive.backleft();
+            else if (gamepad1.dpad_right) drive.backright();
+            else drive.move(0, 0, 0);
+
+             */
+
             if (gamepad1.b) slowMode = !slowMode;
-            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
+            /*   slowMode
             if (gamepad1.a) {slide.reset(); encoderset = true;}
 
 
@@ -68,6 +82,7 @@ public class DriveTrain extends LinearOpMode {
             if (gamepad1.dpad_down) {slide.tozero(); presetactive = true;}
             if (gamepad1.dpad_left) {slide.low(); presetactive = true;}
             if(gamepad1.dpad_up) {slide.middle(); presetactive = true;}
+            if (gamepad1.dpad_right) {slide.lower(); presetactive = true;}
             if (!slide.isBusy() && presetactive) {slide.stop(); presetactive = false;}
 
 
@@ -80,7 +95,7 @@ public class DriveTrain extends LinearOpMode {
             }
 
             if (counter % 100 == 0) telemetry.clear();
-
+            */
         }
     }
 }

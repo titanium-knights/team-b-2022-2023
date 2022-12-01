@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities.computervision;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.utilities.computervision.pipelines.ComputerVisionPipeline;
@@ -11,15 +12,17 @@ import org.openftc.easyopencv.OpenCvWebcam;
 import static org.firstinspires.ftc.teamcode.utilities.CONFIG.WEBCAM;
 
 public class ComputerVision extends LinearOpMode {
+
+    public ComputerVision(HardwareMap hmap) {
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hmap.get(WebcamName.class,"webcam"));
+    }
+
     public OpenCvWebcam webcam;
     public ComputerVisionPipeline cvp = new ComputerVisionPipeline();
 
     @Override
     public void runOpMode() {
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, WEBCAM));
-
         webcam.setPipeline(cvp);
-
         webcam.setMillisecondsPermissionTimeout(2500);
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
 
