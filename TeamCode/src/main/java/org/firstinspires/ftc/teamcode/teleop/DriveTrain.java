@@ -38,21 +38,20 @@ public class DriveTrain extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
-            /*if (gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
-                telemetry.addData("PositionX", gamepad1.left_stick_x);
-                telemetry.addData("PositionY", gamepad1.left_stick_y);
-                telemetry.update();
-                ++counter;
-            }
-            if (counter % 100 == 0) telemetry.clear();
-            if (gamepad1.dpad_up) drive.frontleft();
-            else if (gamepad1.dpad_down) drive.frontright();
-            else if (gamepad1.dpad_left) drive.backleft();
-            else if (gamepad1.dpad_right) drive.backright();
-            else drive.move(0, 0, 0);
+            double[] wheels = drive.getPowers();
+            telemetry.addData("fl", wheels[0]);
+            telemetry.addData("fr", wheels[1]);
+            telemetry.addData("bl", wheels[2]);
+            telemetry.addData("br", wheels[3]);
+            telemetry.update();
+            ++counter;
+            if (counter % 1000 == 0) telemetry.clear();
 
-             */
+
+
+            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), gamepad1.left_stick_y * (slowMode ? 0.3 : .7), -gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
+
+            if (counter % 100 == 0) telemetry.clear();
 
             if (gamepad1.b) slowMode = !slowMode;
             /*   slowMode
@@ -68,6 +67,8 @@ public class DriveTrain extends LinearOpMode {
                 telemetry.update();
                 ++counter;
             }
+
+
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
                 presetactive = false;

@@ -18,11 +18,9 @@ public class MecanumDrive {
         br = hmap.get(DcMotor.class, CONFIG.BACKRIGHT);
 
         fl.setDirection(DcMotorSimple.Direction.REVERSE);
-        bl.setDirection(DcMotorSimple.Direction.FORWARD);
+        bl.setDirection(DcMotorSimple.Direction.REVERSE);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         br.setDirection(DcMotorSimple.Direction.REVERSE);
-        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         directions.put(fl, new double[]{1, 1});
         directions.put(fr, new double[]{1, -1});
@@ -34,19 +32,10 @@ public class MecanumDrive {
 
     public static DcMotor fl, fr, bl, br;
 
-    public void frontleft(){fl.setPower(1);}
-    public void frontright(){fr.setPower(-1);}
-    public void backleft(){bl.setPower(-1);}
-    public void backright(){br.setPower(-1);}
 
 
 
     public static HashMap<DcMotor, double[]> directions = new HashMap<>();
-
-
-    public void fl(){
-        fl.setPower(-1);
-    }
     public void move(double x, double y, double turn) {
 
         // dot of fl and br
@@ -60,13 +49,15 @@ public class MecanumDrive {
         br.setPower(dot_br / max);
 
         fr.setPower(-1 * dot_fr / max);
-        bl.setPower(-1 * dot_bl / max);
+        bl.setPower(dot_bl / max);
     }
 
-    public void getBL(){};
 
     // Each double[] will be a direction vector of length two
     public double dot(double[] a, double[] b) {return a[0] * b[0] + a[1] * b[1];    }
 
-
+    public double[] getPowers() {
+        return new double[]{fl.getPower(), fr.getPower(), bl.getPower(), br.getPower()};
+    }
 }
+
