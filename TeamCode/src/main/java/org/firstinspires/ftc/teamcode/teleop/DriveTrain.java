@@ -50,7 +50,7 @@ public class DriveTrain extends LinearOpMode {
             if (gamepad1.left_trigger > 0) {
                 presetactive = false;
                 slide.upHold();
-                telemetry.addData("encoder postup", slide.getEncoder());
+                telemetry.addData("encoder postup", slide.getEncoderL());
                 telemetry.update();
                 ++counter;
             }
@@ -58,7 +58,7 @@ public class DriveTrain extends LinearOpMode {
             else if (gamepad1.right_trigger > 0) {
                 presetactive = false;
                 slide.downHold(encoderset);
-                telemetry.addData("encoder postdown", slide.getEncoder());
+                telemetry.addData("encoder postdown", slide.getEncoderL());
                 telemetry.update();
                 ++counter;
 

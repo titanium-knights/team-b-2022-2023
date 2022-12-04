@@ -9,9 +9,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Slides {
-    DcMotor slideMotor;
+    DcMotor slideMotorL;
+    DcMotor slideMotorR;
     //position at initial
-    int pos;
+    int Lpos;
+    int Rpos;
     int state;
 
     //unknown, values go into negative, 0 > lowheight > midheight > maxheight
@@ -20,86 +22,121 @@ public class Slides {
     int lowheight = -3800;
 
     public Slides(HardwareMap hmap){
-        this.slideMotor = hmap.dcMotor.get(CONFIG.SLIDE);
-        this.state = this.pos = 0;
-        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setZeroPowerBehavior(BRAKE);
+        this.slideMotorL = hmap.dcMotor.get(CONFIG.SLIDEL);
+        this.slideMotorR = hmap.dcMotor.get(CONFIG.SLIDER);
+        this.state = this.Lpos = this.Rpos = 0;
+
+        slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        slideMotorL.setZeroPowerBehavior(BRAKE);
+        slideMotorR.setZeroPowerBehavior(BRAKE);
+    }
+
+    public int getEncoderL(){
+        return slideMotorL.getCurrentPosition();
+    }
+    public int getEncoderR(){
+        return slideMotorR.getCurrentPosition();
+    }
+
+    public void setPower(double power){
+        slideMotorL.setPower(power);
+        slideMotorR.setPower(power);
     }
 
     public void stop(){
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setPower(0);
-        pos = getEncoder();
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        setPower(0);
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
         state = 0;
     }
 
-    public boolean isBusy() {return slideMotor.isBusy(); }
-
-    public int getEncoder(){
-        return slideMotor.getCurrentPosition();
-    }
+    public boolean isBusy() {return slideMotorL.isBusy();}
 
     public void setTarget(int target){
-        slideMotor.setTargetPosition(target);
+        slideMotorL.setTargetPosition(target);
+        slideMotorR.setPower(target);
     }
 
     public void reset(){
-        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        pos = 0;
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        Lpos = Rpos = 0;
+
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void runToPosition(){
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slideMotor.setPower(4);
+        slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        setPower(1);
     }
 
     public void tozero(){
-        setTarget(-200);
+        setTarget(-100);
         runToPosition();
-        pos = getEncoder();
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
     public void low(){
         setTarget(lowheight);
         runToPosition();
-        pos = getEncoder();
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
     public void middle(){
         setTarget(midheight);
         runToPosition();
-        pos = getEncoder();
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
     public void upHold(){
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        if (state == 1 && pos <= midheight + 1500){
-            slideMotor.setPower(-0.75);
-            pos = getEncoder();
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        if (state == 1 && Lpos <= midheight + 1500){
+            setPower(-0.75);
+            Lpos = getEncoderL();
+            Rpos = getEncoderR();
+            return;
         }
-        if (state == 1 || pos <= maxheight) return;
+        if (state == 1 || Lpos <= maxheight) return;
         state = 1;
-        slideMotor.setPower(-2);
-        pos = getEncoder();
+        setPower(-1);
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
     public void downHold(boolean encoder){
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         if (!encoder){
-            slideMotor.setPower(1.5);
+            setPower(1.5);
             return;
         }
-        if (state == 2 && pos >= -1800){
-            slideMotor.setPower(0.5);
-            pos = getEncoder();
+        if (state == 2 && Lpos >= -1800){
+            setPower(0.5);
+            Lpos = getEncoderL();
+            Rpos = getEncoderR();
             return;
         }
-        if (state == 2 || pos >= -200) return;
+        if (state == 2 || Lpos >= -200) return;
         state = 2;
-        slideMotor.setPower(3);
-        pos = getEncoder();
+        setPower(1);
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
 
@@ -108,18 +145,22 @@ public class Slides {
 
     // time-based / jerks
     public void pSlideUp() throws InterruptedException {
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setPower(-1);
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        setPower(-1);
         sleep(100);
-        slideMotor.setPower(0);
-        pos = getEncoder();
+        setPower(0);
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 
     public void pSlideDown() throws InterruptedException {
-        slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotor.setPower(1);
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        setPower(1);
         sleep(100);
-        slideMotor.setPower(0);
-        pos = getEncoder();
+        setPower(0);
+        Lpos = getEncoderL();
+        Rpos = getEncoderR();
     }
 }
