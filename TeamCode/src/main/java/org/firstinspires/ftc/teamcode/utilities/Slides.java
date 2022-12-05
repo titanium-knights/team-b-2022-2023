@@ -43,10 +43,21 @@ public class Slides {
         return slideMotorR.getCurrentPosition();
     }
 
+    public void pos(){
+        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideMotorL.setPower(1);
+        slideMotorR.setPower(1);
+    }
+
     public void setPower(double power){
         slideMotorL.setPower(power);
         slideMotorR.setPower(power);
     }
+
+
+
+
 
     public void stop(){
         slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -61,7 +72,8 @@ public class Slides {
 
     public void setTarget(int target){
         slideMotorL.setTargetPosition(target);
-        slideMotorR.setPower(target);
+        slideMotorR.setTargetPosition(target);
+
     }
 
     public void reset(){
