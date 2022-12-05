@@ -18,9 +18,9 @@ public class MecanumDrive {
         br = hmap.get(DcMotor.class, CONFIG.BACKRIGHT);
 
         fl.setDirection(DcMotorSimple.Direction.REVERSE);
-        bl.setDirection(DcMotorSimple.Direction.REVERSE);
+        bl.setDirection(DcMotorSimple.Direction.FORWARD);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        br.setDirection(DcMotorSimple.Direction.REVERSE);
+        br.setDirection(DcMotorSimple.Direction.FORWARD);
 
         directions.put(fl, new double[]{1, 1});
         directions.put(fr, new double[]{1, -1});
