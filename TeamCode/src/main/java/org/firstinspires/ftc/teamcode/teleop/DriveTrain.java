@@ -37,41 +37,46 @@ public class DriveTrain extends LinearOpMode {
         int mod = 1;
 
         waitForStart();
-
+        slide.reset();
         while (opModeIsActive()) {
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
             drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
-            if (gamepad1.a) {slide.reset(); encoderset = true;}
-            telemetry.addData("left", slide.getEncoderL());
-            telemetry.addData("right", slide.getEncoderR());
-            if (gamepad1.x) {slide.pos();};
+            if (gamepad1.a && !encoderset) {slide.reset(); encoderset = true;}
 
+            /*
+            if (gamepad1.b){
+                telemetry.addData("Request L", slide.getEncoders()[0]);
+                telemetry.addData("Request R", slide.getEncoders()[1]);
+                telemetry.update();
+                ++counter;
+            }
+            */
 
 
             // Slides
-            /*Manual control, up
+            //Manual control, up
             if (gamepad1.left_trigger > 0) {
+                encoderset = true;
                 presetactive = false;
                 slide.upHold();
-                telemetry.addData("encoder postup", slide.getEncoderL());
-                telemetry.update();
                 ++counter;
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
                 presetactive = false;
                 slide.downHold(encoderset);
-                telemetry.addData("encoder postdown", slide.getEncoderL());
-                telemetry.update();
                 ++counter;
-
             } else if (!presetactive) {slide.stop();}
 
 
-            if (gamepad1.dpad_down) {slide.tozero(); presetactive = true;}
-            if (gamepad1.dpad_left) {slide.low(); presetactive = true;}
-            if(gamepad1.dpad_up) {slide.middle(); presetactive = true;}
+
+
+
+
+            if (gamepad1.dpad_down) {slide.tozero(); presetactive = true; encoderset = true;}
+            if (gamepad1.dpad_left) {slide.low(); presetactive = true; encoderset = true;}
+            if(gamepad1.dpad_up) {slide.middle(); presetactive = true; encoderset = true;}
             if (!slide.isBusy() && presetactive) {slide.stop(); presetactive = false;}
 
 
@@ -83,7 +88,7 @@ public class DriveTrain extends LinearOpMode {
                 claw.close();
             }
 
-             */
+
 
             if (counter % 100 == 0) telemetry.clear();
 
