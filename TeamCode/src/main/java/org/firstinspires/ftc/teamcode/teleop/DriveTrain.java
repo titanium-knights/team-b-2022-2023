@@ -25,7 +25,7 @@ public class DriveTrain extends LinearOpMode {
         telemetry.setAutoClear(false);
 
         //mecanum
-        boolean slowMode = false;
+        boolean slowMode = true;
         //telemetry resetter
         int counter = 0;
         //If disconnects during match - checks if encoder reset to 0
@@ -40,7 +40,7 @@ public class DriveTrain extends LinearOpMode {
         slide.reset();
         while (opModeIsActive()) {
             //   slowMode
-            if (gamepad1.b) slowMode = !slowMode;
+            //if (gamepad1.b) slowMode = !slowMode;
             drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .7), -gamepad1.left_stick_y * (slowMode ? 0.3 : .7), gamepad1.right_stick_x * (slowMode ? 0.3 : .7));
             if (gamepad1.a && !encoderset) {slide.reset(); encoderset = true;}
 
@@ -58,7 +58,7 @@ public class DriveTrain extends LinearOpMode {
             //Manual control, up
             if (gamepad1.left_trigger > 0) {
                 encoderset = true;
-                presetactive = false;
+            presetactive = false;
                 slide.upHold();
                 ++counter;
             }
