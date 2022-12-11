@@ -23,12 +23,12 @@ public class ColorDetection extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
-        robot.move (-0.5, 0,0);
-        sleep(450);
-        robot.move(0, 0, 0);
-        sleep(1000);
         robot.move (0, 0.5, 0);
         sleep(700);
+        robot.move(0, 0, 0);
+        sleep(1000);
+        robot.move (-0.5, 0,0);
+        sleep(450);
         robot.move(0,0,0);
 
         int count = 0;
@@ -63,12 +63,12 @@ public class ColorDetection extends LinearOpMode {
         sleep(5000);
 
         // reset
-        robot.move (0, -0.5, 0);
-        sleep(500);
-        robot.move(0,0,0);
-        sleep(1000);
         robot.move (0.5, 0,0);
         sleep(450);
+        robot.move(0,0,0);
+        sleep(1000);
+        robot.move (0, -0.5, 0);
+        sleep(500);
         robot.move(0, 0, 0);
         sleep(1000);
 

@@ -25,7 +25,7 @@ public class DriveTrain extends LinearOpMode {
         telemetry.setAutoClear(false);
 
         //mecanum
-        boolean slowMode = true;
+        boolean slowMode = false;
         //telemetry resetter
         int counter = 0;
         //If disconnects during match - checks if encoder reset to 0
@@ -69,26 +69,25 @@ public class DriveTrain extends LinearOpMode {
                 ++counter;
             } else if (!presetactive) {slide.stop();}
 
-
-
-
-
-
             if (gamepad1.dpad_down) {slide.tozero(); presetactive = true; encoderset = true;}
             if (gamepad1.dpad_left) {slide.low(); presetactive = true; encoderset = true;}
             if(gamepad1.dpad_up) {slide.middle(); presetactive = true; encoderset = true;}
             if (!slide.isBusy() && presetactive) {slide.stop(); presetactive = false;}
 
-
             //Claw
             if (gamepad1.left_bumper){
                 claw.open();
+                telemetry.addData("RIGHT CLAW OPEN:", claw.getRightPosition());
+                telemetry.addData("LEFT CLAW OPEN:", claw.getLeftPosition());
+
+                telemetry.update();
             }
             if (gamepad1.right_bumper) {
                 claw.close();
+                telemetry.addData("RIGHT CLAW CLOSE:", claw.getRightPosition());
+                telemetry.addData("LEFT CLAW CLOSE:", claw.getLeftPosition());
+                telemetry.update();
             }
-
-
 
             if (counter % 100 == 0) telemetry.clear();
 
