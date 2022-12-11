@@ -127,7 +127,7 @@ public class Slides {
             return;
         }
         if (state == 1 && Rpos >= midheight + 1500){
-            setPower(0.75);
+            setPower(0.375);
             Lpos = getEncoders()[0];
             Rpos = getEncoders()[1];
             return;
