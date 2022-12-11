@@ -23,6 +23,13 @@ public class ColorDetection extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
+        robot.move (-0.5, 0,0);
+        sleep(450);
+        robot.move(0, 0, 0);
+        sleep(1000);
+        robot.move (0, 0.5, 0);
+        sleep(600);
+        robot.move(0,0,0);
 
         int count = 0;
         int hue_sum = 0;
@@ -54,15 +61,18 @@ public class ColorDetection extends LinearOpMode {
         telemetry.update();
 
         sleep(5000);
-        robot.move (0, 1.6, 0);
-        sleep(800);
-        robot.move(0,0,0);
 
-        robot.move (0, -1.6, 0);
-        sleep(800);
+        robot.move (0, -0.5, 0);
+        sleep(500);
         robot.move(0,0,0);
+        sleep(1000);
+        robot.move (0.5, 0,0);
+        sleep(700);
+        robot.move(0, 0, 0);
 
-        if (color.equals("green")) {
+
+
+        if (color.equals("blue")) {
             robot.move(-1,0,0);
             sleep(800);
             robot.move(0,0,0);
@@ -72,18 +82,18 @@ public class ColorDetection extends LinearOpMode {
         }
         // move to spot 2
         else if (color.equals("yellow")) {
-            robot.move(0,2,0);
-            sleep(800);
+            robot.move(0,0.5,0);
+            sleep(700);
             robot.move(0,0,0);
         }
 
         // move to spot 3
         else if (color.equals("pink")) {
-            robot.move(1,0,0);
-            sleep(800);
+            robot.move(0.5,0,0);
+            sleep(700);
             robot.move(0,0,0);
-            robot.move(0,2,0);
-            sleep(800);
+            robot.move(0,0.5,0);
+            sleep(1000);
             robot.move(0,0,0);
         }
     }
