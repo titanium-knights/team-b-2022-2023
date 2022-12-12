@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 
-@Autonomous(name="ColorDetectionAuton")
-public class ColorDetection extends LinearOpMode {
+@Autonomous(name="ColorDetectionAutonRight")
+public class ColorDetec_Right extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
@@ -25,8 +25,8 @@ public class ColorDetection extends LinearOpMode {
         MecanumDrive robot = new MecanumDrive(hardwareMap);
 
 
-        robot.move (-0.5, 0,0);
-        sleep(450);
+        robot.move (0.5, 0,0);
+        sleep(200);
         robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.5, 0);
