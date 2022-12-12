@@ -11,9 +11,6 @@ import org.firstinspires.ftc.teamcode.utilities.Slides;
 
 @TeleOp(name="DriveTrain Teleop")
 public class DriveTrain extends LinearOpMode {
-    int maxheight = -8000;
-    int midheight = -6847;
-    int lowheight = -3800;
 
 
     @Override
@@ -29,7 +26,6 @@ public class DriveTrain extends LinearOpMode {
         //telemetry resetter
         int counter = 0;
         //If disconnects during match - checks if encoder reset to 0
-        boolean encoderset = false;
 
 
         //If preset is active: Reset by manual movement, or when position reached.
@@ -41,40 +37,38 @@ public class DriveTrain extends LinearOpMode {
         while (opModeIsActive()) {
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
-            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .55), -gamepad1.left_stick_y * (slowMode ? 0.3 : .55), gamepad1.right_stick_x * (slowMode ? 0.3 : .55));
-            if (gamepad1.a && !encoderset) {slide.reset(); encoderset = true;}
-
-            /*
-            if (gamepad1.b){
-                telemetry.addData("Request L", slide.getEncoders()[0]);
-                telemetry.addData("Request R", slide.getEncoders()[1]);
-                telemetry.update();
-                ++counter;
-            }
-            */
+            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .6), -gamepad1.left_stick_y * (slowMode ? 0.3 : .6), gamepad1.right_stick_x * (slowMode ? 0.3 : .55));
 
 
             // Slides
             //Manual control, up
             if (gamepad1.left_trigger > 0) {
-                encoderset = true;
-            presetactive = false;
+                presetactive = false;
                 slide.upHold();
+                telemetry.addData("Up", slide.getEncoders()[0]);
+                telemetry.update();
                 ++counter;
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
                 presetactive = false;
-                slide.downHold(encoderset);
+                slide.downHold(true);
+                telemetry.addData("Down", slide.getEncoders()[0]);
+                telemetry.update();
                 ++counter;
             } else if (!presetactive) {slide.stop();}
 
-            if (gamepad1.dpad_down) {slide.tozero(); presetactive = true; encoderset = true;}
-            if (gamepad1.dpad_left) {slide.low(); presetactive = true; encoderset = true;}
-            if(gamepad1.dpad_up) {slide.middle(); presetactive = true; encoderset = true;}
+            if (gamepad1.dpad_down) {slide.tozero(); presetactive = true;}
+            if (gamepad1.dpad_left) {slide.low(); presetactive = true;}
+            if(gamepad1.dpad_up) {slide.middle(); presetactive = true;}
             if (!slide.isBusy() && presetactive) {slide.stop(); presetactive = false;}
 
             //Claw
+            if (gamepad1.x){
+                telemetry.addData("RIGHT CLAW OPEN:", claw.getRightPosition());
+                telemetry.addData("LEFT CLAW OPEN:", claw.getLeftPosition());
+                telemetry.update();
+            }
             if (gamepad1.left_bumper){
                 claw.open();
                 telemetry.addData("RIGHT CLAW OPEN:", claw.getRightPosition());
