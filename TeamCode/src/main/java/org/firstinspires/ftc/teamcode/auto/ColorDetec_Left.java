@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//Auton starting on left side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 
-@Autonomous(name="ColorDetectionAuton_HorizontalFirst")
-public class HorizntalFirst extends LinearOpMode {
+@Autonomous(name="ColorDetectionAutonLeft")
+public class ColorDetec_Left extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
@@ -23,13 +23,15 @@ public class HorizntalFirst extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
+
+
         robot.move (-0.5, 0,0);
         sleep(450);
-        robot.move(0, 0, 0);
+        robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.5, 0);
         sleep(700);
-        robot.move(0,0,0);
+        robot.move(0, 0, 0);
 
         int count = 0;
         int hue_sum = 0;
@@ -63,13 +65,15 @@ public class HorizntalFirst extends LinearOpMode {
         sleep(5000);
 
         // reset
+
+
         robot.move (0, -0.5, 0);
         sleep(500);
-        robot.move(0,0,0);
+        robot.move(0, 0, 0);
         sleep(1000);
         robot.move (0.5, 0,0);
         sleep(450);
-        robot.move(0, 0, 0);
+        robot.move(0,0,0);
         sleep(1000);
 
         if (color.equals("blue")) {
@@ -83,6 +87,10 @@ public class HorizntalFirst extends LinearOpMode {
 
         // move to spot 2
         else if (color.equals("yellow")) {
+            robot.move(-0.5,0,0);
+            sleep(250);
+            robot.move(0,0,0);
+            sleep(100);
             robot.move(0,0.5,0);
             sleep(1000);
             robot.move(0,0,0);

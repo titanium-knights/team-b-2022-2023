@@ -65,8 +65,8 @@ public class DriveTrain extends LinearOpMode {
 
             //Claw
             if (gamepad1.x){
-                telemetry.addData("RIGHT CLAW OPEN:", claw.getRightPosition());
-                telemetry.addData("LEFT CLAW OPEN:", claw.getLeftPosition());
+                telemetry.addData("RIGHT CLAW TELEMETRY:", claw.getRightPosition());
+                telemetry.addData("LEFT CLAW TELEMETRY:", claw.getLeftPosition());
                 telemetry.update();
             }
             if (gamepad1.left_bumper){

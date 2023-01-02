@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//Auton starting on right side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
