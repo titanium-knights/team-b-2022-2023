@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//Auton starting on left side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 
-@Autonomous(name="ColorDetectionAuton")
-public class ColorDetection extends LinearOpMode {
+@Autonomous(name="ColorDetectionAutonLeft")
+public class ColorDetec_Left extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
