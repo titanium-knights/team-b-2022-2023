@@ -66,7 +66,6 @@ public class ColorDetection extends LinearOpMode {
 
         // reset
 
-
         robot.move (0, -0.5, 0);
         sleep(500);
         robot.move(0, 0, 0);
