@@ -23,7 +23,7 @@ public class Slides {
 
     //Preset heights,
     // TO DO: CALIBRATE
-    int maxheight = 8000;
+    int maxheight = 12000;
     int midheight = 6847;
     int lowheight = 1669;
 
