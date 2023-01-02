@@ -12,7 +12,8 @@ public class Claw {
     public Claw(HardwareMap hmap){
         this.clawServo_left = hmap.servo.get(CONFIG.CLAW_L);
         this.clawServo_right = hmap.servo.get(CONFIG.CLAW_R);
-        this.posr = this.posl = 0;
+        this.posr = 0;
+        this.posl = 0;
     }
 
     public void increase(){
