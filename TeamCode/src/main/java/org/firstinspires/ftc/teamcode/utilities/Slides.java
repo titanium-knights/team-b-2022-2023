@@ -23,9 +23,9 @@ public class Slides {
 
     //Preset heights,
     // TO DO: CALIBRATE
-    int maxheight = 8000;
+    int maxheight = 12000;
     int midheight = 6847;
-    int lowheight = 3800;
+    int lowheight = 1669;
 
     public Slides(HardwareMap hmap){
         this.slideMotorL = hmap.dcMotor.get(CONFIG.SLIDEL);
@@ -45,7 +45,7 @@ public class Slides {
     DcMotor slideMotorR;
 
     public int[] getEncoders(){
-        return new int[]{slideMotorL.getCurrentPosition(), slideMotorR.getCurrentPosition()};
+        return new int[]{-slideMotorL.getCurrentPosition(), slideMotorR.getCurrentPosition()};
     }
 
     public int[] getTargets(){
@@ -92,7 +92,7 @@ public class Slides {
     public void runToPosition(){
         slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        setPower(1);
+        setPower(0.6);
 
     }
 
@@ -122,12 +122,12 @@ public class Slides {
         slideMotorR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Lpos = getEncoders()[0];
         Rpos = getEncoders()[1];
-        if (Rpos >= maxheight){
+        if (Lpos >= maxheight){
             setPower(0);
             return;
         }
-        if (state == 1 && Rpos >= midheight + 1500){
-            setPower(0.75);
+        if (state == 1 && Lpos >= midheight + 1500){
+            setPower(1);
             Lpos = getEncoders()[0];
             Rpos = getEncoders()[1];
             return;
@@ -146,16 +146,13 @@ public class Slides {
         slideMotorR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Lpos = getEncoders()[0];
         Rpos = getEncoders()[1];
-        if (!encoder){
-            setPower(-1.5);
-            return;
-        }
-        if (Rpos <= 100){
+
+        if (Lpos <= 0){
             setPower(0);
             return;
         }
-        if (state == 2 && Rpos <= 1800){
-            setPower(-0.5);
+        if (state == 2 && Lpos <= 1800){
+            setPower(-0.4);
             Lpos = getEncoders()[0];
             Rpos = getEncoders()[1];
             return;
@@ -165,7 +162,7 @@ public class Slides {
             return;
         }
         state = 2;
-        setPower(-1);
+        setPower(-0.6);
 
     }
 
