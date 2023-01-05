@@ -12,12 +12,14 @@ import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 public class ColorDetection extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
+    ColorSensor colorSensor2;
     String color;
 
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorV3");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorR");
+        colorSensor2 = hardwareMap.get(ColorSensor.class, "colorL");
 
         // Wait for the Play button to be pressed
         waitForStart();
