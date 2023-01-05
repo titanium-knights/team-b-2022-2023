@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//Auton starting on right side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -8,30 +8,29 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 
-@Autonomous(name="ColorDetectionAuton")
-public class ColorDetection extends LinearOpMode {
+@Autonomous(name="ColorDetectionRightAuton")
+public class ColorDetec_Right extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
-    ColorSensor colorSensor2;
     String color;
 
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorR");
-        colorSensor2 = hardwareMap.get(ColorSensor.class, "colorL");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorV3");
 
         // Wait for the Play button to be pressed
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
-        robot.move (-0.5, 0,0);
-        sleep(450);
-        robot.move(0, 0, 0);
-        sleep(1000);
+
         robot.move (0, 0.5, 0);
         sleep(700);
         robot.move(0,0,0);
+        sleep(1000);
+        robot.move (-0.5, 0,0);
+        sleep(450);
+        robot.move(0, 0, 0);
 
         int count = 0;
         int hue_sum = 0;
@@ -65,13 +64,14 @@ public class ColorDetection extends LinearOpMode {
         sleep(5000);
 
         // reset
-        robot.move (0, -0.5, 0);
-        sleep(500);
-        robot.move(0,0,0);
-        sleep(1000);
+
         robot.move (0.5, 0,0);
         sleep(450);
         robot.move(0, 0, 0);
+        sleep(1000);
+        robot.move (0, -0.5, 0);
+        sleep(500);
+        robot.move(0,0,0);
         sleep(1000);
 
         if (color.equals("blue")) {
@@ -85,6 +85,10 @@ public class ColorDetection extends LinearOpMode {
 
         // move to spot 2
         else if (color.equals("yellow")) {
+            robot.move(-0.5,0,0);
+            sleep(250);
+            robot.move(0,0,0);
+            sleep(100);
             robot.move(0,0.5,0);
             sleep(1000);
             robot.move(0,0,0);

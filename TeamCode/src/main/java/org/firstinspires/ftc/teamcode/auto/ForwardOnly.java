@@ -19,8 +19,8 @@ public class ForwardOnly extends LinearOpMode {
         telemetry.addLine("start");
 
         sleep(5000);
-        robot.move (0, 1.6, 0); // change value
-        sleep(800); // change value
+        robot.move (0, 0.5, 0); // change value
+        sleep(1000); // change value
         robot.move(0,0,0);
 
         telemetry.addLine("end");
