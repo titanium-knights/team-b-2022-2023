@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.auto;
-//Auton starting on left side of the field
+//PUSHED 1/6/23 5:35
+//ALIGN ROBOT WITH INNER BOTTOM CORNER
+//Auton starting on right side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,7 +19,8 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorV3");
+        //This mode uses the left color sensor
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorL");
 
         // Wait for the Play button to be pressed
         waitForStart();
@@ -26,11 +29,11 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
 
 
         robot.move (0.5, 0,0);
-        sleep(450);
+        sleep(550);
         robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.5, 0);
-        sleep(700);
+        sleep(600);
         robot.move(0, 0, 0);
 
         int count = 0;
@@ -59,7 +62,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
             color="blue";
         }
 
-        telemetry.addData("color", color);
+        telemetry.addData("color LEFT SENSOR", color);
         telemetry.update();
 
         sleep(5000);
@@ -71,13 +74,14 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         robot.move(0, 0, 0);
         sleep(1000);
         robot.move (-0.5, 0,0);
-        sleep(450);
+        sleep(550);
         robot.move(0,0,0);
         sleep(1000);
 
+        //move to spot 1
         if (color.equals("blue")) {
             robot.move(-0.5,0,0);
-            sleep(1400);
+            sleep(1600);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1100);
@@ -86,7 +90,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
 
         // move to spot 2
         else if (color.equals("yellow")) {
-            robot.move(-0.5,0,0);
+            robot.move(0.5,0,0);
             sleep(250);
             robot.move(0,0,0);
             sleep(100);
@@ -98,7 +102,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         // move to spot 3
         else if (color.equals("pink")) {
             robot.move(0.5,0, 0);
-            sleep(1050);
+            sleep(1450);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1000);
