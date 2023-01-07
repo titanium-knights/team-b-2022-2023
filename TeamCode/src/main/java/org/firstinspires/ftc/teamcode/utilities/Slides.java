@@ -132,16 +132,14 @@ public class Slides {
             Rpos = getEncoders()[1];
             return;
         }
-
         if (state == 1){
             return;
         }
         state = 1;
         setPower(1);
-
     }
 
-    public void downHold(boolean encoder){
+    public void downHold(){
         slideMotorL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         slideMotorR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Lpos = getEncoders()[0];
