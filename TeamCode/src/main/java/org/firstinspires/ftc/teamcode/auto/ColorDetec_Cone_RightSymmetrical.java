@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.auto;
 //PUSHED 1/6/23 5:35
 //ALIGN ROBOT WITH INNER BOTTOM CORNER
-//Auton starting on left side of the field
+//Auton starting on right side of the field
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -10,19 +10,17 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 
-@Autonomous(name="ColorDetectionAutonLeft")
-public class ColorDetec_Left extends LinearOpMode {
+@Autonomous(name="ColorDetectionConeAutonRightSymmetrical")
+public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
-    ColorSensor colorSensor2;
     String color;
 
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
-        //This mode uses the right color sensor
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorR");
-
+        //This mode uses the left color sensor
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorL");
 
         // Wait for the Play button to be pressed
         waitForStart();
@@ -30,15 +28,15 @@ public class ColorDetec_Left extends LinearOpMode {
         MecanumDrive robot = new MecanumDrive(hardwareMap);
 
 
-        robot.move (-0.29, 0,0);
+        robot.move (0.3, 0,0); //changed from 0.5 to 0.3
         sleep(550);
         robot.move(0,0,0);
         sleep(1000);
-        robot.move (0, 0.5, 0);
+        robot.move (0, 0.44, 0);
         sleep(600);
         robot.move(0, 0, 0);
         sleep(550);
-        robot.move(-0.42, 0, 0); // new addition
+        robot.move(0.35, 0, 0); // new addition
         sleep(550);
         robot.move(0, 0, 0);
         sleep(550);
@@ -69,39 +67,39 @@ public class ColorDetec_Left extends LinearOpMode {
             color="blue";
         }
 
-        telemetry.addData("color RIGHT SENSOR", color);
+        telemetry.addData("color LEFT SENSOR", color);
         telemetry.update();
 
         sleep(5000);
 
         // reset
 
-        robot.move(0.42, 0, 0);
+        robot.move(-0.35, 0, 0);
         sleep(550);
         robot.move(0,0,0);
         sleep(550);
-        robot.move (0, -0.5, 0);
+        robot.move (0, -0.44, 0);
         sleep(500);
         robot.move(0, 0, 0);
         sleep(1000);
-        robot.move (0.29, 0,0);
+        robot.move (-0.3, 0,0);
         sleep(550);
         robot.move(0,0,0);
         sleep(1000);
 
-        // Location 1
+        //move to spot 1
         if (color.equals("blue")) {
-            robot.move(-0.51,0,0);
+            robot.move(-0.41,0,0);
             sleep(1600);
             robot.move(0,0,0);
-            robot.move(0,0.53,0);
+            robot.move(0,0.5,0);
             sleep(1100);
             robot.move(0,0,0);
         }
 
-        // Location 3
+        // move to spot 2
         else if (color.equals("yellow")) {
-            robot.move(-0.5,0,0);
+            robot.move(0.5,0,0);
             sleep(250);
             robot.move(0,0,0);
             sleep(100);
@@ -110,10 +108,10 @@ public class ColorDetec_Left extends LinearOpMode {
             robot.move(0,0,0);
         }
 
-        // Location 3
+        // move to spot 3
         else if (color.equals("pink")) {
-            robot.move(0.53,0, 0);
-            sleep(1050);
+            robot.move(0.5,0, 0);
+            sleep(1600); //changed from 1450
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1000);
