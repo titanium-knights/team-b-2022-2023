@@ -28,13 +28,18 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         MecanumDrive robot = new MecanumDrive(hardwareMap);
 
 
-        robot.move (0.5, 0,0);
+        robot.move (0.3, 0,0); //changed from 0.5 to 0.3
         sleep(550);
         robot.move(0,0,0);
         sleep(1000);
-        robot.move (0, 0.5, 0);
+        robot.move (0, 0.44, 0);
         sleep(600);
         robot.move(0, 0, 0);
+        sleep(550);
+        robot.move(0.35, 0, 0); // new addition
+        sleep(550);
+        robot.move(0, 0, 0);
+        sleep(550);
 
         int count = 0;
         int hue_sum = 0;
@@ -54,9 +59,9 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         }
         int hue_avg = hue_sum/30;
         telemetry.addData("Hue Avg", hue_avg);
-        if(hue_avg<=120) {
+        if(hue_avg<=137) {
             color="yellow";
-        } else if(hue_avg<=169) {
+        } else if(hue_avg<=160) {
             color="pink";
         } else {
             color="blue";
@@ -69,18 +74,22 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
 
         // reset
 
-        robot.move (0, -0.5, 0);
+        robot.move(-0.35, 0, 0);
+        sleep(550);
+        robot.move(0,0,0);
+        sleep(550);
+        robot.move (0, -0.44, 0);
         sleep(500);
         robot.move(0, 0, 0);
         sleep(1000);
-        robot.move (-0.5, 0,0);
+        robot.move (-0.3, 0,0);
         sleep(550);
         robot.move(0,0,0);
         sleep(1000);
 
         //move to spot 1
         if (color.equals("blue")) {
-            robot.move(-0.5,0,0);
+            robot.move(-0.41,0,0);
             sleep(1600);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
@@ -102,7 +111,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         // move to spot 3
         else if (color.equals("pink")) {
             robot.move(0.5,0, 0);
-            sleep(1450);
+            sleep(1600); //changed from 1450
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1000);
