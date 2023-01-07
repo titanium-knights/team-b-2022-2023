@@ -9,13 +9,12 @@ public class CONFIG {
     public static String FRONTRIGHT = "fr"; //using this
     public static String BACKLEFT = "bl"; //using this
     public static String BACKRIGHT = "br"; //using this
+    public static String SLIDEL = "sl"; //using this
+    public static String SLIDER = "sr"; //using this
     public static String FRONTDIST = "front";
     public static String BACKDIST = "back";
     public static String LEFTDIST = "left";
     public static String RIGHTDIST = "right";
-    public static String ARMMOTOR = "am";
-    public static String SLIDEL = "sl"; //using this
-    public static String SLIDER = "sr"; //using this
     public static String ANGLE = "angle";
     public static double centerOfRobit2BackDistance = 8; //inches
     public static double centerOfRobit2LeftDistance = 8; //inches
