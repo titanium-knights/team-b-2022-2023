@@ -37,7 +37,12 @@ public class DriveTrain extends LinearOpMode {
         while (opModeIsActive()) {
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
-            drive.move(gamepad1.left_stick_x * (slowMode ? 0.3 : .6), -gamepad1.left_stick_y * (slowMode ? 0.3 : .6), gamepad1.right_stick_x * (slowMode ? 0.3 : .55));
+            drive.move(gamepad1.left_stick_x
+                            * (slowMode ? 0.3 : .6),
+                    -gamepad1.left_stick_y
+                            * (slowMode ? 0.3 : .6),
+                    gamepad1.right_stick_x
+                            * (slowMode ? 0.3 : .55));
 
 
             // Slides
@@ -45,23 +50,29 @@ public class DriveTrain extends LinearOpMode {
             if (gamepad1.left_trigger > 0) {
                 presetactive = false;
                 slide.upHold();
-                telemetry.addData("Up", slide.getEncoders()[0]);
+                telemetry.addData("Up",
+                        slide.getEncoders()[0]);
                 telemetry.update();
                 ++counter;
             }
             //Manual control, down
             else if (gamepad1.right_trigger > 0) {
                 presetactive = false;
-                slide.downHold(true);
-                telemetry.addData("Down", slide.getEncoders()[0]);
+                slide.downHold();
+                telemetry.addData("Down",
+                        slide.getEncoders()[0]);
                 telemetry.update();
                 ++counter;
             } else if (!presetactive) {slide.stop();}
 
-            if (gamepad1.dpad_down) {slide.tozero(); presetactive = true;}
-            if (gamepad1.dpad_left) {slide.low(); presetactive = true;}
-            if(gamepad1.dpad_up) {slide.middle(); presetactive = true;}
-            if (!slide.isBusy() && presetactive) {slide.stop(); presetactive = false;}
+            if (gamepad1.dpad_down) {slide.tozero();
+                presetactive = true;}
+            if (gamepad1.dpad_left) {slide.low();
+                presetactive = true;}
+            if(gamepad1.dpad_up) {slide.middle();
+                presetactive = true;}
+            if (!slide.isBusy() && presetactive) {slide.stop();
+                presetactive = false;}
 
             //Claw
             if (gamepad1.x){
@@ -71,16 +82,9 @@ public class DriveTrain extends LinearOpMode {
             }
             if (gamepad1.left_bumper){
                 claw.open();
-                telemetry.addData("RIGHT CLAW OPEN:", claw.getRightPosition());
-                telemetry.addData("LEFT CLAW OPEN:", claw.getLeftPosition());
-
-                telemetry.update();
             }
             if (gamepad1.right_bumper) {
                 claw.close();
-                telemetry.addData("RIGHT CLAW CLOSE:", claw.getRightPosition());
-                telemetry.addData("LEFT CLAW CLOSE:", claw.getLeftPosition());
-                telemetry.update();
             }
 
             if (counter % 100 == 0) telemetry.clear();
