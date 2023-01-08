@@ -65,7 +65,7 @@ public class DriveTrain extends LinearOpMode {
                 ++counter;
             } else if (!presetactive) {slide.stop();}
 
-            if (gamepad1.dpad_down) {slide.tozero();
+            if (gamepad1.dpad_down) {slide.tozero(); claw.close();
                 presetactive = true;}
             if (gamepad1.dpad_left) {slide.low();
                 presetactive = true;}
@@ -76,8 +76,8 @@ public class DriveTrain extends LinearOpMode {
 
             //Claw
             if (gamepad1.x){
-                telemetry.addData("RIGHT CLAW TELEMETRY:", claw.getRightPosition());
-                telemetry.addData("LEFT CLAW TELEMETRY:", claw.getLeftPosition());
+                telemetry.addData("RIGHT SLIDE TELEMETRY:", slide.getEncoders()[0]);
+                telemetry.addData("LEFT SLIDE TELEMETRY:", slide.getEncoders()[1]);
                 telemetry.update();
             }
             if (gamepad1.left_bumper){
