@@ -38,17 +38,18 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         sleep(400);
 
         robot.move (0.3, 0,0); //changed from 0.5 to 0.3
-        sleep(550);
+        sleep(530);
         robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.44, 0);
-        sleep(600);
+        sleep(540);
         robot.move(0, 0, 0);
         sleep(550);
         robot.move(0.35, 0, 0); // new addition
-        sleep(550);
+        sleep(500);
         robot.move(0, 0, 0);
         sleep(550);
+
 
         int count = 0;
         int hue_sum = 0;
@@ -70,7 +71,7 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         telemetry.addData("Hue Avg", hue_avg);
         if(hue_avg<=137) {
             color="yellow";
-        } else if(hue_avg<=160) {
+        } else if(hue_avg<=170) {
             color="pink";
         } else {
             color="blue";
@@ -88,11 +89,11 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         robot.move(0,0,0);
         sleep(550);
         robot.move (0, -0.44, 0);
-        sleep(500);
+        sleep(450);
         robot.move(0, 0, 0);
         sleep(1000);
         robot.move (-0.3, 0,0);
-        sleep(550);
+        sleep(530);
         robot.move(0,0,0);
         sleep(1000);
 
@@ -104,6 +105,11 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
             robot.move(0,0.5,0);
             sleep(1100);
             robot.move(0,0,0);
+            sleep(100);
+            robot.move(0.4, 0, 0);
+            sleep(200);
+            robot.move(0, 0, 0);
+
         }
 
         // move to spot 2
@@ -123,7 +129,7 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
             sleep(1600); //changed from 1450
             robot.move(0,0,0);
             robot.move(0,0.5,0);
-            sleep(1000);
+            sleep(1200);
             robot.move(0,0,0);
         }
     }

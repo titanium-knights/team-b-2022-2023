@@ -24,7 +24,7 @@ public class Slides {
     //Preset heights,
     // TO DO: CALIBRATE
     int maxheight = 12000;
-    int midheight = 6847;
+    int midheight = 2600;
     int lowheight = 1669;
 
     public Slides(HardwareMap hmap){
@@ -145,10 +145,6 @@ public class Slides {
         Lpos = getEncoders()[0];
         Rpos = getEncoders()[1];
 
-        if (Lpos <= 0){
-            setPower(0);
-            return;
-        }
         if (state == 2 && Lpos <= 1800){
             setPower(-0.4);
             Lpos = getEncoders()[0];
