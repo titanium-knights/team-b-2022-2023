@@ -28,8 +28,8 @@ import java.util.List;
  */
 @Config
 public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 537.6; // look at manufacturer's site
-    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double TICKS_PER_REV = 8192; // look at manufacturer's site
+    public static double WHEEL_RADIUS = 0.6889764; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
     public static double LATERAL_DISTANCE = 8.5; // (tbd need dead wheels) in; distance between the left and right wheels
