@@ -56,7 +56,7 @@ public class Slides {
     }
 
     public void setPower(double power){
-        slideMotorL.setPower(-0.9898*power);
+        slideMotorL.setPower(-1*power); // constant removed
         slideMotorR.setPower(power);
     }
 

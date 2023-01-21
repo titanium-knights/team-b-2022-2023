@@ -47,11 +47,11 @@ public class ColorDetec_Cone_Left extends LinearOpMode {
         robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.5, 0);
-        sleep(620);
+        sleep(500);
         robot.move(0, 0, 0);
         sleep(550);
         robot.move(-0.35, 0, 0); // new addition
-        sleep(680);
+        sleep(520);
         robot.move(0, 0, 0);
         sleep(550);
 
@@ -93,7 +93,7 @@ public class ColorDetec_Cone_Left extends LinearOpMode {
         robot.move(0,0,0);
         sleep(550);
         robot.move (0, -0.5, 0);
-        sleep(460);
+        sleep(400);
         robot.move(0, 0, 0);
         sleep(1000);
         robot.move (0.3, 0,0);
@@ -109,9 +109,6 @@ public class ColorDetec_Cone_Left extends LinearOpMode {
             robot.move(0,0.53,0);
             sleep(1100);
             robot.move(0,0,0);
-            sleep(100);
-            robot.move(-0.5, 0, 0);
-            sleep(300);
         }
 
         // Location 3
@@ -128,7 +125,7 @@ public class ColorDetec_Cone_Left extends LinearOpMode {
         // Location 3
         else if (color.equals("pink")) {
             robot.move(0.53,0, 0);
-            sleep(1050);
+            sleep(850);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1000);
