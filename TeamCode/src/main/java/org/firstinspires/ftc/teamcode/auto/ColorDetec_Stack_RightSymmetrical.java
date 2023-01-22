@@ -9,9 +9,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
+import org.firstinspires.ftc.teamcode.utilities.Claw;
+import org.firstinspires.ftc.teamcode.utilities.Slides;
 
-@Autonomous(name="ColorDetectionAutonRightSymmetrical")
-public class ColorDetec_RightSymmetrical extends LinearOpMode {
+@Autonomous(name="ColorDetectionStackAutonRightSymmetrical")
+public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
@@ -26,7 +28,41 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         waitForStart();
 
         MecanumDrive robot = new MecanumDrive(hardwareMap);
+        Claw claw = new Claw(hardwareMap);
+        Slides slides = new Slides(hardwareMap);
 
+        claw.close();
+        slides.low();
+        while (!slides.isBusy()) {
+            continue;
+        }
+        slides.stop();
+
+        robot.move(-0.3,0,0);
+        sleep(600);
+        robot.move(0,0,0);
+        sleep(500);
+        robot.move(0,0.2,0);
+        sleep(500);
+        robot.move(0, 0.1, 0);
+        sleep(250);
+        robot.move(0,0,0);
+        sleep(500);
+        slides.tozero();
+        while (!slides.isBusy()) {
+            continue;
+        }
+        slides.stop();
+        robot.move(0,-0.1,0);
+        sleep(250);
+        robot.move(0,-0.2,0);
+        sleep(500);
+        robot.move(0,0,0);
+        sleep(500);
+        robot.move(0.3,0,0);
+        sleep(600);
+        robot.move(0,0,0);
+        sleep(500);
 
         robot.move (0.3, 0,0); //changed from 0.5 to 0.3
         sleep(530);
