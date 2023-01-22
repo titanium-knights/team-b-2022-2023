@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.auto;
 //Auton starting on right side of the field
 import android.graphics.Color;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 import org.firstinspires.ftc.teamcode.utilities.Claw;
 import org.firstinspires.ftc.teamcode.utilities.Slides;
 
+@Config
 @Autonomous(name="ColorDetectionStackAutonRightSymmetrical")
 public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
