@@ -33,6 +33,15 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
     public static int returningback = 450;
     public static int returninginit = 530;
 
+    public static int blueleft = 1700;
+    public static int blueforward = 1100;
+
+    public static int yellowright = 250;
+    public static int yellowforward = 1100;
+
+    public static int pinkright = 1530;
+    public static int pinkforward = 1200;
+
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
@@ -155,31 +164,31 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         //move to spot 1
         if (color.equals("blue")) {
             robot.move(-0.41,0,0);
-            sleep(1600);
+            sleep(blueleft);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
-            sleep(1100);
+            sleep(blueforward);
             robot.move(0,0,0);
         }
 
         // move to spot 2
         else if (color.equals("yellow")) {
             robot.move(0.5,0,0);
-            sleep(250);
+            sleep(yellowright);
             robot.move(0,0,0);
             sleep(100);
             robot.move(0,0.5,0);
-            sleep(1100);
+            sleep(yellowforward);
             robot.move(0,0,0);
         }
 
         // move to spot 3
         else if (color.equals("pink")) {
             robot.move(0.5,0, 0);
-            sleep(1530); //changed from 1450
+            sleep(pinkright); //changed from 1450
             robot.move(0,0,0);
             robot.move(0,0.5,0);
-            sleep(1200);
+            sleep(pinkforward);
             robot.move(0,0,0);
         }
     }
