@@ -4,18 +4,25 @@ package org.firstinspires.ftc.teamcode.auto;
 //Auton starting on left side of the field
 import android.graphics.Color;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
-
+@Config
 @Autonomous(name="ColorDetectionAutonLeft")
 public class ColorDetec_Left extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     ColorSensor colorSensor2;
     String color;
+    public static int initleft = 530;
+    public static int initforward = 550;
+    public static int centeringleft = 485;
+    public static int returningright = 485;
+    public static int returningback = 550;
+    public static int returninginit = 530;
 
     @Override
     public void runOpMode() {
@@ -30,18 +37,18 @@ public class ColorDetec_Left extends LinearOpMode {
         MecanumDrive robot = new MecanumDrive(hardwareMap);
 
 
-        robot.move (-0.29, 0,0);
-        sleep(550);
+        robot.move (-0.3, 0,0);
+        sleep(initleft);
         robot.move(0,0,0);
-        sleep(1000);
+        sleep(150);
         robot.move (0, 0.5, 0);
-        sleep(500);
+        sleep(initforward);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(100);
         robot.move(-0.35, 0, 0); // new addition
-        sleep(520);
+        sleep(centeringleft);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(150);
 
         int count = 0;
         int hue_sum = 0;
@@ -76,18 +83,18 @@ public class ColorDetec_Left extends LinearOpMode {
 
         // reset
 
-        robot.move(0.42, 0, 0);
-        sleep(500);
+        robot.move(0.35, 0, 0);
+        sleep(returningright);
         robot.move(0,0,0);
-        sleep(550);
-        robot.move (0, -0.5, 0);
-        sleep(400);
+        sleep(150);
+        robot.move (0, -0.46, 0);
+        sleep(returningback);
         robot.move(0, 0, 0);
-        sleep(1000);
+        sleep(200);
         robot.move (0.3, 0,0);
-        sleep(520);
+        sleep(returninginit);
         robot.move(0,0,0);
-        sleep(1000);
+        sleep(200);
 
         // Location 1
         if (color.equals("blue")) {
