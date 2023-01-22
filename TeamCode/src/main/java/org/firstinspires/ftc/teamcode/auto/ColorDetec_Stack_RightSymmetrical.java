@@ -47,37 +47,51 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         Slides slides = new Slides(hardwareMap);
 
         claw.close();
+        sleep(300);
         slides.low();
-        while (!slides.isBusy()) {
+        while (slides.isBusy()) {
             continue;
         }
         slides.stop();
 
-        robot.move(-0.3,0,0);
+        robot.move(-0.5,0,0);
         sleep(junctionleft);
         robot.move(0,0,0);
-        sleep(500);
-        robot.move(0,0.2,0);
+        sleep(200);
+        robot.move(0,0.5,0);
         sleep(junctionforward);
-        robot.move(0, 0.1, 0);
+        robot.move(0, 0.3, 0);
         sleep(junctionslowforward);
         robot.move(0,0,0);
-        sleep(500);
-        slides.tozero();
-        while (!slides.isBusy()) {
+        sleep(200);
+
+
+        slides.todrop();
+        while (slides.isBusy()) {
             continue;
         }
         slides.stop();
-        robot.move(0,-0.1,0);
+        claw.open();
+
+        slides.tozero();
+        while (slides.isBusy()) {
+            continue;
+        }
+        slides.stop();
+
+
+        sleep(200);
+
+        robot.move(0,-0.3,0);
         sleep(junctionslowback);
-        robot.move(0,-0.2,0);
+        robot.move(0,-0.5,0);
         sleep(junctionback);
         robot.move(0,0,0);
-        sleep(500);
-        robot.move(0.3,0,0);
+        sleep(200);
+        robot.move(0.5,0,0);
         sleep(junctionright);
         robot.move(0,0,0);
-        sleep(500);
+        sleep(200);
 
         robot.move (0.3, 0,0); //changed from 0.5 to 0.3
         sleep(initright);
