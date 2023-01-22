@@ -19,10 +19,19 @@ public class ColorDetec_Left extends LinearOpMode {
     String color;
     public static int initleft = 530;
     public static int initforward = 550;
-    public static int centeringleft = 485;
+    public static int centeringleft = 515;
     public static int returningright = 485;
     public static int returningback = 550;
     public static int returninginit = 530;
+
+    public static int blueleft = 1700;
+    public static int blueforward = 1200;
+
+    public static int yellowleft = 250;
+    public static int yellowforward = 1500;
+
+    public static int pinkright = 1200;
+    public static int pinkforward = 1500;
 
     @Override
     public void runOpMode() {
@@ -98,32 +107,34 @@ public class ColorDetec_Left extends LinearOpMode {
 
         // Location 1
         if (color.equals("blue")) {
-            robot.move(-0.51,0,0);
-            sleep(1600);
+            robot.move(-0.5,0,0);
+            sleep(blueleft);
             robot.move(0,0,0);
-            robot.move(0,0.53,0);
-            sleep(1100);
+            sleep(100);
+            robot.move(0,0.5,0);
+            sleep(blueforward);
             robot.move(0,0,0);
         }
 
         // Location 3
         else if (color.equals("yellow")) {
             robot.move(-0.5,0,0);
-            sleep(250);
+            sleep(yellowleft);
             robot.move(0,0,0);
             sleep(100);
             robot.move(0,0.5,0);
-            sleep(1000);
+            sleep(yellowforward);
             robot.move(0,0,0);
         }
 
         // Location 3
         else if (color.equals("pink")) {
-            robot.move(0.53,0, 0);
-            sleep(850);
+            robot.move(0.5,0, 0);
+            sleep(pinkright);
             robot.move(0,0,0);
+            sleep(100);
             robot.move(0,0.5,0);
-            sleep(1000);
+            sleep(pinkforward);
             robot.move(0,0,0);
         }
     }
