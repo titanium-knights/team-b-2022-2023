@@ -17,7 +17,7 @@ public class ColorDetec_Right extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Get the color sensor from hardwareMap
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorV3");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorL");
 
         // Wait for the Play button to be pressed
         waitForStart();

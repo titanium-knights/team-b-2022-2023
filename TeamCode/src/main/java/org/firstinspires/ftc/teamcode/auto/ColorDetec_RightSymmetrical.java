@@ -33,11 +33,11 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         robot.move(0,0,0);
         sleep(1000);
         robot.move (0, 0.5, 0);
-        sleep(600);
+        sleep(550);
         robot.move(0, 0, 0);
         sleep(550);
         robot.move(0.35, 0, 0); // new addition
-        sleep(560);
+        sleep(485);
         robot.move(0, 0, 0);
         sleep(550);
 
@@ -75,22 +75,22 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         // reset
 
         robot.move(-0.35, 0, 0);
-        sleep(550);
+        sleep(485);
         robot.move(0,0,0);
         sleep(550);
-        robot.move (0, -0.44, 0);
-        sleep(500);
+        robot.move (0, -0.46, 0);
+        sleep(550);
         robot.move(0, 0, 0);
         sleep(1000);
         robot.move (-0.3, 0,0);
-        sleep(520);
+        sleep(530);
         robot.move(0,0,0);
         sleep(1000);
 
         //move to spot 1
         if (color.equals("blue")) {
             robot.move(-0.41,0,0);
-            sleep(2000);
+            sleep(1700);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1100);
@@ -104,17 +104,17 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
             robot.move(0,0,0);
             sleep(100);
             robot.move(0,0.5,0);
-            sleep(1000);
+            sleep(1100);
             robot.move(0,0,0);
         }
 
         // move to spot 3
         else if (color.equals("pink")) {
             robot.move(0.5,0, 0);
-            sleep(1600); //changed from 1450
+            sleep(1480); //changed from 1450
             robot.move(0,0,0);
             robot.move(0,0.5,0);
-            sleep(1500);
+            sleep(1200);
             robot.move(0,0,0);
         }
     }
