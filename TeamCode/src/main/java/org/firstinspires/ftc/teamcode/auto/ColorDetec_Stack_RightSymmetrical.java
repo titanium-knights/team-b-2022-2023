@@ -19,18 +19,18 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
-    public static int junctionleft = 600;
-    public static int junctionforward = 500;
+    public static int junctionleft = 490;
+    public static int junctionforward = 270;
     public static int junctionslowforward = 250;
     public static int junctionslowback = 250;
-    public static int junctionback = 500;
-    public static int junctionright = 600;
+    public static int junctionback = 100;
+    public static int junctionright = 430;
 
     public static int initright = 530;
-    public static int initforward = 550;
-    public static int centeringright = 485;
+    public static int initforward = 620;
+    public static int centeringright = 450;
     public static int returningleft = 485;
-    public static int returningback = 550;
+    public static int returningback = 450;
     public static int returninginit = 530;
 
     @Override
@@ -47,7 +47,7 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         Slides slides = new Slides(hardwareMap);
 
         claw.close();
-        sleep(300);
+        sleep(800);
         slides.low();
         while (slides.isBusy()) {
             continue;
@@ -72,7 +72,7 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         }
         slides.stop();
         claw.open();
-
+        sleep(200);
         slides.tozero();
         while (slides.isBusy()) {
             continue;
@@ -155,7 +155,7 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         //move to spot 1
         if (color.equals("blue")) {
             robot.move(-0.41,0,0);
-            sleep(1700);
+            sleep(1600);
             robot.move(0,0,0);
             robot.move(0,0.5,0);
             sleep(1100);
