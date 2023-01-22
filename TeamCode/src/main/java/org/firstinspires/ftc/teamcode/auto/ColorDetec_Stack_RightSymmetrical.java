@@ -17,6 +17,19 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
+    public static int junctionleft = 600;
+    public static int junctionforward = 500;
+    public static int junctionslowforward = 250;
+    public static int junctionslowback = 250;
+    public static int junctionback = 500;
+    public static int junctionright = 600;
+
+    public static int initright = 530;
+    public static int initforward = 550;
+    public static int centeringright = 485;
+    public static int returningleft = 485;
+    public static int returningback = 550;
+    public static int returninginit = 530;
 
     @Override
     public void runOpMode() {
@@ -39,13 +52,13 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         slides.stop();
 
         robot.move(-0.3,0,0);
-        sleep(600);
+        sleep(junctionleft);
         robot.move(0,0,0);
         sleep(500);
         robot.move(0,0.2,0);
-        sleep(500);
+        sleep(junctionforward);
         robot.move(0, 0.1, 0);
-        sleep(250);
+        sleep(junctionslowforward);
         robot.move(0,0,0);
         sleep(500);
         slides.tozero();
@@ -54,28 +67,28 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         }
         slides.stop();
         robot.move(0,-0.1,0);
-        sleep(250);
+        sleep(junctionslowback);
         robot.move(0,-0.2,0);
-        sleep(500);
+        sleep(junctionback);
         robot.move(0,0,0);
         sleep(500);
         robot.move(0.3,0,0);
-        sleep(600);
+        sleep(junctionright);
         robot.move(0,0,0);
         sleep(500);
 
         robot.move (0.3, 0,0); //changed from 0.5 to 0.3
-        sleep(530);
+        sleep(initright);
         robot.move(0,0,0);
-        sleep(1000);
+        sleep(200);
         robot.move (0, 0.5, 0);
-        sleep(550);
+        sleep(initforward);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(150);
         robot.move(0.35, 0, 0); // new addition
-        sleep(485);
+        sleep(centeringright);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(150);
 
         int count = 0;
         int hue_sum = 0;
@@ -111,17 +124,17 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         // reset
 
         robot.move(-0.35, 0, 0);
-        sleep(485);
+        sleep(returningleft);
         robot.move(0,0,0);
-        sleep(550);
+        sleep(150);
         robot.move (0, -0.46, 0);
-        sleep(550);
+        sleep(returningback);
         robot.move(0, 0, 0);
-        sleep(1000);
+        sleep(200);
         robot.move (-0.3, 0,0);
-        sleep(530);
+        sleep(returninginit);
         robot.move(0,0,0);
-        sleep(1000);
+        sleep(200);
 
         //move to spot 1
         if (color.equals("blue")) {
