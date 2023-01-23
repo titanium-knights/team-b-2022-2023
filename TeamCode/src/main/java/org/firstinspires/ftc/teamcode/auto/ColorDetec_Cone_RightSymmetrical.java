@@ -4,17 +4,34 @@ package org.firstinspires.ftc.teamcode.auto;
 //Auton starting on right side of the field
 import android.graphics.Color;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
-
+@Config
 @Autonomous(name="ColorDetectionConeAutonRightSymmetrical")
 public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor colorSensor;
     String color;
+    public static int initright = 480;
+    public static int initforward = 430;
+    public static int centeringright = 555;
+    public static int returningleft = 485;
+    public static int returningback = 410;
+    public static int returninginit = 530;
+
+    public static int blueleft = 900;
+    public static int blueforward = 1200;
+
+    public static int yellowleft = 250;
+    public static int yellowforward = 1000;
+
+    public static int pinkright = 1500;
+    public static int pinkforward = 800;
+
 
     @Override
     public void runOpMode() {
@@ -38,17 +55,17 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         sleep(400);
 
         robot.move (0.3, 0,0); //changed from 0.5 to 0.3
-        sleep(530);
+        sleep(initright);
         robot.move(0,0,0);
-        sleep(1000);
-        robot.move (0, 0.44, 0);
-        sleep(540);
+        sleep(150);
+        robot.move (0, 0.5, 0);
+        sleep(initforward);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(150);
         robot.move(0.35, 0, 0); // new addition
-        sleep(500);
+        sleep(centeringright);
         robot.move(0, 0, 0);
-        sleep(550);
+        sleep(150);
 
 
         int count = 0;
@@ -69,9 +86,9 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         }
         int hue_avg = hue_sum/30;
         telemetry.addData("Hue Avg", hue_avg);
-        if(hue_avg<=137) {
+        if(hue_avg<=130) {
             color="yellow";
-        } else if(hue_avg<=170) {
+        } else if(hue_avg<=150) {
             color="pink";
         } else {
             color="blue";
@@ -80,56 +97,58 @@ public class ColorDetec_Cone_RightSymmetrical extends LinearOpMode {
         telemetry.addData("color LEFT SENSOR", color);
         telemetry.update();
 
-        sleep(5000);
+        sleep(500);
 
         // reset
 
         robot.move(-0.35, 0, 0);
-        sleep(550);
+        sleep(returningleft);
         robot.move(0,0,0);
-        sleep(550);
-        robot.move (0, -0.44, 0);
-        sleep(450);
+        sleep(150);
+        robot.move (0, -0.46, 0);
+        sleep(returningback);
         robot.move(0, 0, 0);
-        sleep(1000);
+        sleep(200);
         robot.move (-0.3, 0,0);
-        sleep(530);
+        sleep(returninginit);
         robot.move(0,0,0);
-        sleep(1000);
+        sleep(100);
 
         //move to spot 1
         if (color.equals("blue")) {
-            robot.move(-0.41,0,0);
-            sleep(1600);
-            robot.move(0,0,0);
-            robot.move(0,0.5,0);
-            sleep(1100);
+            robot.move(-0.5,0,0);
+            sleep(blueleft);
             robot.move(0,0,0);
             sleep(100);
-            robot.move(0.4, 0, 0);
-            sleep(200);
-            robot.move(0, 0, 0);
+            robot.move(0,0.5,0);
+            sleep(blueforward);
+            robot.move(0,0,0);
+//            sleep(100);
+//            robot.move(0.4, 0, 0);
+//            sleep(200);
+//            robot.move(0, 0, 0);
 
         }
 
         // move to spot 2
         else if (color.equals("yellow")) {
             robot.move(0.5,0,0);
-            sleep(250);
+            sleep(yellowleft);
             robot.move(0,0,0);
             sleep(100);
             robot.move(0,0.5,0);
-            sleep(1000);
+            sleep(yellowforward);
             robot.move(0,0,0);
         }
 
         // move to spot 3
         else if (color.equals("pink")) {
             robot.move(0.5,0, 0);
-            sleep(1600); //changed from 1450
+            sleep(pinkright); //changed from 1450
             robot.move(0,0,0);
+            sleep(100);
             robot.move(0,0.5,0);
-            sleep(1200);
+            sleep(pinkforward);
             robot.move(0,0,0);
         }
     }

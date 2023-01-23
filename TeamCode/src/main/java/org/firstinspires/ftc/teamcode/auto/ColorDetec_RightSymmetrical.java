@@ -17,19 +17,19 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
     ColorSensor colorSensor;
     String color;
     public static int initright = 530;
-    public static int initforward = 550;
-    public static int centeringright = 485;
+    public static int initforward = 430;
+    public static int centeringright = 475;
     public static int returningleft = 485;
-    public static int returningback = 550;
+    public static int returningback = 420;
     public static int returninginit = 530;
 
-    public static int blueleft = 1700;
+    public static int blueleft = 1220;
     public static int blueforward = 1100;
 
     public static int yellowright = 250;
     public static int yellowforward = 1100;
 
-    public static int pinkright = 1530;
+    public static int pinkright = 1700;
     public static int pinkforward = 1200;
 
     @Override
@@ -75,7 +75,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         }
         int hue_avg = hue_sum/30;
         telemetry.addData("Hue Avg", hue_avg);
-        if(hue_avg<=137) {
+        if(hue_avg<=127) {
             color="yellow";
         } else if(hue_avg<=160) {
             color="pink";
@@ -86,7 +86,7 @@ public class ColorDetec_RightSymmetrical extends LinearOpMode {
         telemetry.addData("color LEFT SENSOR", color);
         telemetry.update();
 
-        sleep(5000);
+        sleep(2000);
 
         // reset
 
