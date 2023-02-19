@@ -38,9 +38,9 @@ public class DriveTrain extends LinearOpMode {
             //   slowMode
             if (gamepad1.b) slowMode = !slowMode;
             drive.move(gamepad1.left_stick_x
-                            * (slowMode ? 0.3 : .6),
+                            * (slowMode ? 0.3 : .8),
                     -gamepad1.left_stick_y
-                            * (slowMode ? 0.3 : .6),
+                            * (slowMode ? 0.3 : .8),
                     gamepad1.right_stick_x
                             * (slowMode ? 0.3 : .55));
 
