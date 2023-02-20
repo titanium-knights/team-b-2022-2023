@@ -11,6 +11,7 @@ public class CONFIG {
     public static String BACKRIGHT = "br"; //using this
     public static String SLIDEL = "sl"; //using this
     public static String SLIDER = "sr"; //using this
+    public static String ARM = "arm";
     public static String FRONTDIST = "front";
     public static String BACKDIST = "back";
     public static String LEFTDIST = "left";
