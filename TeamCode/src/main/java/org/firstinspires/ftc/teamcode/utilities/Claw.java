@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Claw {
     Servo clawServo_right;
     Servo clawServo_left;
-
     //right + = close, left - = close
 
     public Claw(HardwareMap hmap){
@@ -14,9 +13,23 @@ public class Claw {
         this.clawServo_right = hmap.servo.get(CONFIG.CLAW_R);
     }
 
+
     public double getLeftPosition() {return clawServo_left.getPosition();}
     public double getRightPosition() {return clawServo_right.getPosition();}
 
-    public void close(){clawServo_right.setPosition(0.6); clawServo_left.setPosition(0.6);}
-    public void open(){clawServo_right.setPosition(-0.4); clawServo_left.setPosition(0.4);}
+    public void open(){
+        clawServo_left.setPosition(0.15);
+//        clawServo_right.setPosition(0.95);
+    }
+    public void close(){
+        clawServo_left.setPosition(0.5);
+//        clawServo_right.setPosition(0.86);
+    }
+
+    public void test1(){
+        clawServo_left.setPosition(1);
+    }
+    public void test0(){
+        clawServo_left.setPosition(0);
+    }
 }
