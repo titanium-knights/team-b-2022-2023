@@ -54,8 +54,8 @@ public class AprilTagDetectionPipelineSim extends OpenCvPipeline
     Scalar green = new Scalar(0,255,0,255);
     Scalar white = new Scalar(255,255,255,255);
 
-    double fx = 578.272;
-    double fy = 578.272;
+    double fx = 1000; // guess
+    double fy = 1000; // guess
     double cx = 640;
     double cy = 360;
 
