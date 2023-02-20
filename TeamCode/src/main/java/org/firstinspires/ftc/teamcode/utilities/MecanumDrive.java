@@ -20,24 +20,17 @@ public class MecanumDrive {
         fl.setDirection(DcMotorSimple.Direction.REVERSE);
         bl.setDirection(DcMotorSimple.Direction.FORWARD);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        br.setDirection(DcMotorSimple.Direction.REVERSE);
+        br.setDirection(DcMotorSimple.Direction.FORWARD);
 
         directions.put(fl, new double[]{1, 1});
         directions.put(fr, new double[]{1, -1});
         directions.put(bl, new double[]{1, -1});
-
         directions.put(br, new double[]{1, 1});
     }
 
-
     public static DcMotor fl, fr, bl, br;
 
-
-
-
     public static HashMap<DcMotor, double[]> directions = new HashMap<>();
-
-
 
     public void move(double x, double y, double turn) {
 
@@ -52,7 +45,7 @@ public class MecanumDrive {
         br.setPower(dot_br / max);
 
         fr.setPower(dot_fr / max);
-        bl.setPower(-1*dot_bl / max);
+        bl.setPower(dot_bl / max);
     }
 
     // Each double[] will be a direction vector of length two
