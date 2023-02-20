@@ -25,4 +25,11 @@ public class Claw {
         clawServo_left.setPosition(0.5);
 //        clawServo_right.setPosition(0.86);
     }
+
+    public void test1(){
+        clawServo_left.setPosition(1);
+    }
+    public void test0(){
+        clawServo_left.setPosition(0);
+    }
 }
