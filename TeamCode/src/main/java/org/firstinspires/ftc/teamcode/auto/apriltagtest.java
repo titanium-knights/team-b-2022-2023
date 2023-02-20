@@ -44,8 +44,8 @@ public class apriltagtest extends LinearOpMode {
     // UNITS ARE PIXELS
     // NOTE: this calibration is for the C920 webcam at 800x448.
     // You will need to do your own calibration for other configurations!
-    double fx = 578.272;
-    double fy = 578.272;
+    double fx = 1000; // guess
+    double fy = 1000; // guess
     double cx = 640;
     double cy = 360;
 
