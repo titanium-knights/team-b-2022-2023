@@ -21,6 +21,8 @@
 
 package org.firstinspires.ftc.teamcode.auto;
 
+import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -35,6 +37,8 @@ import org.openftc.easyopencv.OpenCvInternalCamera2;
 
 import java.util.ArrayList;
 
+@Config
+@Autonomous(name="apriltagtest")
 public class apriltagtest extends LinearOpMode {
 
     OpenCvCamera camera;
@@ -86,40 +90,81 @@ public class apriltagtest extends LinearOpMode {
             }
         });
 
-        if (opModeIsActive()) {//change to 'if' statement
-            /*telemetry.addData("1 imu heading", lastAngles.firstAngle);
+        /*telemetry.addData("1 imu heading", lastAngles.firstAngle);
             telemetry.addData("2 global heading", globalAngle);
             telemetry.addData("3 correction", correction);*/
-            //sleep(260);
-            //detectTag();
-            //telemetry.update();
-            //motorsRun(-195, -195, -195, -195);
-            //sleep(3000);
-            while(tagID == 0){
-                detectTag();
-                telemetry.addData("tag", tagID);
-                telemetry.update();
-            }
-            //motorsRun(-1000, -1000, -1000, -1000);//drive forward to the next tile
-            //sleep(2000);
-            //putConeRight();
-
-            /*if(tagID == 1){
-                motorsRun(1300, -1300, -1300, 1300);
-            }
-            else if(tagID == 3){
-                motorsRun(-1150, 1150, 1150, -1150);
-            }
-            else if(tagID == 2){
-                motorsRun(0, 0, 0, 0);
-            }*/
-
+        //sleep(260);
+        //detectTag();
+        //telemetry.update();
+        //motorsRun(-195, -195, -195, -195);
+        //sleep(3000);
+        while(tagID == 0){
+            telemetry.addData("cum", "cum");
+            detectTag();
+            telemetry.addData("tag", tagID);
+            telemetry.update();
         }
+        //motorsRun(-1000, -1000, -1000, -1000);//drive forward to the next tile
+        //sleep(2000);
+        //putConeRight();
 
+        if(tagID == 4){
+//                motorsRun(1300, -1300, -1300, 1300);
+            telemetry.addData("tag", tagID);
+            telemetry.addData("NUMBER", "FOUR");
+        }
+        else if(tagID == 5){
+//                motorsRun(-1150, 1150, 1150, -1150);
+            telemetry.addData("tag", tagID);
+            telemetry.addData("NUMBER", "FIVE");
+        }
+        else if(tagID == 19){
+//                motorsRun(0, 0, 0, 0);
+            telemetry.addData("tag", tagID);
+            telemetry.addData("NUMBER", "NINETEEN");
+        }
+        telemetry.update();
         sleep(100000000);
+
+//        if (opModeIsActive()) {//change to 'if' statement
+//            /*telemetry.addData("1 imu heading", lastAngles.firstAngle);
+//            telemetry.addData("2 global heading", globalAngle);
+//            telemetry.addData("3 correction", correction);*/
+//            //sleep(260);
+//            //detectTag();
+//            //telemetry.update();
+//            //motorsRun(-195, -195, -195, -195);
+//            //sleep(3000);
+//            while(tagID == 0){
+//                detectTag();
+//                telemetry.addData("tag", tagID);
+//                telemetry.update();
+//            }
+//            //motorsRun(-1000, -1000, -1000, -1000);//drive forward to the next tile
+//            //sleep(2000);
+//            //putConeRight();
+//
+//            if(tagID == 4){
+////                motorsRun(1300, -1300, -1300, 1300);
+//                telemetry.addData("tag", tagID);
+//            }
+//            else if(tagID == 5){
+////                motorsRun(-1150, 1150, 1150, -1150);
+//                telemetry.addData("tag", tagID);
+//            }
+//            else if(tagID == 19){
+////                motorsRun(0, 0, 0, 0);
+//                telemetry.addData("tag", tagID);
+//            }
+//
+//        }
+
+//        sleep(100000000);
     }
 
     void detectTag() {
+        telemetry.addData("detecting", "arf");
+        telemetry.update();
         // Calling getDetectionsUpdate() will only return an object if there was a new frame
         // processed since the last time we called it. Otherwise, it will return null. This
         // enables us to only run logic when there has been a new frame, as opposed to the
@@ -138,7 +183,8 @@ public class apriltagtest extends LinearOpMode {
             if(detections.size() == 0)
             {
                 numFramesWithoutDetection++;
-
+                telemetry.addData("frames without detection", numFramesWithoutDetection);
+                telemetry.update();
                 // If we haven't seen a tag for a few frames, lower the decimation
                 // so we can hopefully pick one up if we're e.g. far back
                 if(numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION)
@@ -169,8 +215,8 @@ public class apriltagtest extends LinearOpMode {
                     yaw = Math.toDegrees(detection.pose.yaw);
                     pitch = Math.toDegrees(detection.pose.pitch);
                     roll = Math.toDegrees(detection.pose.roll);
-                    /*telemetry.addLine(String.format("\nDetected tag ID=%d", tagID));
-                    telemetry.addLine(String.format("Translation X: %.2f meters", x));
+                    telemetry.addLine(String.format("\nDetected tag ID=%d", tagID));
+                    /*telemetry.addLine(String.format("Translation X: %.2f meters", x));
                     telemetry.addLine(String.format("Translation Y: %.2f meters", y));
                     telemetry.addLine(String.format("Translation Z: %.2f meters", z-0.3));
                     //telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", yaw));
