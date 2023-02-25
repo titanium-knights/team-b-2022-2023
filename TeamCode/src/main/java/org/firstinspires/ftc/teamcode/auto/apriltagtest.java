@@ -20,6 +20,7 @@
  */
 
 package org.firstinspires.ftc.teamcode.auto;
+import org.firstinspires.ftc.teamcode.utilities.Slides;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -67,7 +68,8 @@ public class apriltagtest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
+        Slides slides = new Slides(hardwareMap);
+        slides.todrop();
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
