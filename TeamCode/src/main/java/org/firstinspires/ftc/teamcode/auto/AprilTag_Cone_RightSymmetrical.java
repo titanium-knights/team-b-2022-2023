@@ -24,10 +24,10 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.pipeline.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -36,18 +36,30 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="apriltagtest")
-public class apriltagtest extends LinearOpMode {
+@Autonomous(name="AprilTag_Cone_RightSymmetrical")
+public class AprilTag_Cone_RightSymmetrical extends LinearOpMode {
+
+    public static int initright = 480;
+    public static int initforward = 430;
+    public static int centeringright = 555;
+    public static int returningleft = 485;
+    public static int returningback = 410;
+    public static int returninginit = 530;
+
+    public static int blueleft = 900;
+    public static int blueforward = 1200;
+
+    public static int yellowleft = 250;
+    public static int yellowforward = 1000;
+
+    public static int pinkright = 1500;
+    public static int pinkforward = 800;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     static final double FEET_PER_METER = 3.28084;
 
-    // Lens intrinsics
-    // UNITS ARE PIXELS
-    // NOTE: this calibration is for the C920 webcam at 800x448.
-    // You will need to do your own calibration for other configurations!
     double fx = 1000; // guess
     double fy = 1000; // guess
     double cx = 640;
@@ -73,91 +85,81 @@ public class apriltagtest extends LinearOpMode {
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                camera.startStreaming(1280,720, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                camera.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode)
-            {
+            public void onError(int errorCode) {
 
             }
         });
 
-        /*telemetry.addData("1 imu heading", lastAngles.firstAngle);
-            telemetry.addData("2 global heading", globalAngle);
-            telemetry.addData("3 correction", correction);*/
-        //sleep(260);
-        //detectTag();
-        //telemetry.update();
-        //motorsRun(-195, -195, -195, -195);
-        //sleep(3000);
-        while(tagID == 0){
+
+        while (tagID == 0) {
             telemetry.addData("cum", "cum");
             detectTag();
             telemetry.addData("tag", tagID);
             telemetry.update();
         }
-        //motorsRun(-1000, -1000, -1000, -1000);//drive forward to the next tile
-        //sleep(2000);
-        //putConeRight();
 
-        if(tagID == 4){
-//                motorsRun(1300, -1300, -1300, 1300);
+        if (tagID == 4) {
             telemetry.addData("tag", tagID);
             telemetry.addData("NUMBER", "FOUR");
-        }
-        else if(tagID == 5){
-//                motorsRun(-1150, 1150, 1150, -1150);
+        } else if (tagID == 5) {
             telemetry.addData("tag", tagID);
             telemetry.addData("NUMBER", "FIVE");
-        }
-        else if(tagID == 19){
-//                motorsRun(0, 0, 0, 0);
+        } else if (tagID == 19) {
             telemetry.addData("tag", tagID);
             telemetry.addData("NUMBER", "NINETEEN");
         }
         telemetry.update();
-        sleep(100000000);
+        sleep(100000000); // might have to get rid of this
 
-//        if (opModeIsActive()) {//change to 'if' statement
-//            /*telemetry.addData("1 imu heading", lastAngles.firstAngle);
-//            telemetry.addData("2 global heading", globalAngle);
-//            telemetry.addData("3 correction", correction);*/
-//            //sleep(260);
-//            //detectTag();
-//            //telemetry.update();
-//            //motorsRun(-195, -195, -195, -195);
-//            //sleep(3000);
-//            while(tagID == 0){
-//                detectTag();
-//                telemetry.addData("tag", tagID);
-//                telemetry.update();
-//            }
-//            //motorsRun(-1000, -1000, -1000, -1000);//drive forward to the next tile
-//            //sleep(2000);
-//            //putConeRight();
-//
-//            if(tagID == 4){
-////                motorsRun(1300, -1300, -1300, 1300);
-//                telemetry.addData("tag", tagID);
-//            }
-//            else if(tagID == 5){
-////                motorsRun(-1150, 1150, 1150, -1150);
-//                telemetry.addData("tag", tagID);
-//            }
-//            else if(tagID == 19){
-////                motorsRun(0, 0, 0, 0);
-//                telemetry.addData("tag", tagID);
-//            }
-//
-//        }
+        waitForStart();
+        MecanumDrive robot = new MecanumDrive(hardwareMap);
 
-//        sleep(100000000);
+        // MOVING CONE TO TERMINAL
+        robot.move(0.5, 0, 0);
+        sleep(1400);
+        robot.move(0, 0, 0);
+        sleep(400);
+        robot.move(-0.5, 0, 0);
+        sleep(1400);
+        robot.move(0, 0, 0);
+        sleep(400);
+
+        if (tagID == 4) {
+            robot.move(-0.5,0,0);
+            sleep(blueleft);
+            robot.move(0,0,0);
+            sleep(100);
+            robot.move(0,0.5,0);
+            sleep(blueforward);
+            robot.move(0,0,0);
+        }
+
+        if (tagID == 5) {
+            robot.move(0.5,0,0);
+            sleep(yellowleft);
+            robot.move(0,0,0);
+            sleep(100);
+            robot.move(0,0.5,0);
+            sleep(yellowforward);
+            robot.move(0,0,0);
+        }
+
+        if (tagID == 19) {
+            robot.move(0.5,0, 0);
+            sleep(pinkright); //changed from 1450
+            robot.move(0,0,0);
+            sleep(100);
+            robot.move(0,0.5,0);
+            sleep(pinkforward);
+            robot.move(0,0,0);
+        }
     }
 
     void detectTag() {
@@ -173,10 +175,6 @@ public class apriltagtest extends LinearOpMode {
         // If there's been a new frame...
         if(detections != null)
         {
-            /*telemetry.addData("FPS", camera.getFps());
-            telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
-            telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
-            */
             // If we don't see any tags
             if(detections.size() == 0)
             {
@@ -194,7 +192,6 @@ public class apriltagtest extends LinearOpMode {
             else
             {
                 numFramesWithoutDetection = 0;
-
 
                 // If the target is within 1 meter, turn on high decimation to
                 // increase the frame rate
@@ -214,16 +211,6 @@ public class apriltagtest extends LinearOpMode {
                     pitch = Math.toDegrees(detection.pose.pitch);
                     roll = Math.toDegrees(detection.pose.roll);
                     telemetry.addLine(String.format("\nDetected tag ID=%d", tagID));
-                    /*telemetry.addLine(String.format("Translation X: %.2f meters", x));
-                    telemetry.addLine(String.format("Translation Y: %.2f meters", y));
-                    telemetry.addLine(String.format("Translation Z: %.2f meters", z-0.3));
-                    //telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", yaw));
-                    //telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", pitch));
-                    //telemetry.addLine(String.format("Rotation Roll: %.2f degrees", roll));
-                    telemetry.addLine(String.format("fx: %.2f", fx));
-                    telemetry.addLine(String.format("fy: %.2f", fy));
-                    telemetry.addLine(String.format("cx: %.2f", cx));
-                    telemetry.addLine(String.format("cy: %.2f", cy));*/
                 }
             }
 
