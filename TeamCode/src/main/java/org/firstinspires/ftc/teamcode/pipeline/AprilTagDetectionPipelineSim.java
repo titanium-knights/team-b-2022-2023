@@ -54,10 +54,10 @@ public class AprilTagDetectionPipelineSim extends OpenCvPipeline
     Scalar green = new Scalar(0,255,0,255);
     Scalar white = new Scalar(255,255,255,255);
 
-    double fx = 578.272;
-    double fy = 578.272;
-    double cx = 402.145;
-    double cy = 221.506;
+    double fx = 1000; // guess
+    double fy = 1000; // guess
+    double cx = 640;
+    double cy = 360;
 
     // UNITS ARE METERS
     double tagsize = 0.166;
@@ -80,13 +80,13 @@ public class AprilTagDetectionPipelineSim extends OpenCvPipeline
 
     public AprilTagDetectionPipelineSim(Telemetry telemetry, double tagsize, double fx, double fy, double cx, double cy)
     {
-        this.tagsize = tagsize;
+//        this.tagsize = tagsize;
         this.tagsizeX = tagsize;
         this.tagsizeY = tagsize;
-        this.fx = fx;
-        this.fy = fy;
-        this.cx = cx;
-        this.cy = cy;
+//        this.fx = fx;
+//        this.fy = fy;
+//        this.cx = cx;
+//        this.cy = cy;
         this.telemetry = telemetry;
 
         constructMatrix();
@@ -96,7 +96,7 @@ public class AprilTagDetectionPipelineSim extends OpenCvPipeline
     }
 
     public AprilTagDetectionPipelineSim(Telemetry telemetry){
-        this(telemetry, 0.166, 578.272, 578.272, 402.145, 221.506);
+        this(telemetry, 0.166, 578.272, 578.272, 640, 360);
     }
 
     @Override
