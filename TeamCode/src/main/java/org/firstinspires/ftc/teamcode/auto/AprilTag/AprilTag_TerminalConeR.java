@@ -32,28 +32,26 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.firstinspires.ftc.teamcode.utilities.Slides;
 
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="AprilTag_Cone_LeftSymmetrical")
-public class AprilTag_Cone_LeftSymmetrical extends LinearOpMode {
+@Autonomous(name="AprilTag_TerminalConeR")
+public class AprilTag_TerminalConeR extends LinearOpMode {
 
-    public static int initright = 480;
-    public static int initforward = 430;
-    public static int centeringright = 555;
-    public static int returningleft = 485;
-    public static int returningback = 410;
-    public static int returninginit = 530;
-
-    public static int blueleft = 900;
+    public static int bluerot = 100;
+    public static int blueleft = 1500;
     public static int blueforward = 1200;
 
-    public static int yellowleft = 250;
-    public static int yellowforward = 1000;
+    public static int yellowforward = 1200;
 
-    public static int pinkright = 1500;
-    public static int pinkforward = 800;
+    public static int pinkrot = 100;
+    public static int pinkright = 1350;
+    public static int pinkforward =1400;
+
+    public static int side = 1500;
+
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -79,6 +77,11 @@ public class AprilTag_Cone_LeftSymmetrical extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        waitForStart();
+        Slides slides = new Slides(hardwareMap);
+        MecanumDrive robot = new MecanumDrive(hardwareMap);
+        slides.todrop();
+        sleep(1000);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -99,7 +102,7 @@ public class AprilTag_Cone_LeftSymmetrical extends LinearOpMode {
 
 
         while (tagID == 0) {
-            telemetry.addData("cum", "cum");
+            telemetry.addData("detecing", "loop");
             detectTag();
             telemetry.addData("tag", tagID);
             telemetry.update();
@@ -107,47 +110,47 @@ public class AprilTag_Cone_LeftSymmetrical extends LinearOpMode {
 
         if (tagID == 4) {
             telemetry.addData("tag", tagID);
-            telemetry.addData("NUMBER", "FOUR");
+            telemetry.addData("zone", 1);
         } else if (tagID == 5) {
             telemetry.addData("tag", tagID);
-            telemetry.addData("NUMBER", "FIVE");
+            telemetry.addData("zone", 2);
         } else if (tagID == 19) {
             telemetry.addData("tag", tagID);
-            telemetry.addData("NUMBER", "NINETEEN");
+            telemetry.addData("zone", 3);
+        } else{
+            tagID = 4;
+            telemetry.addData("tag", "guess");
+            telemetry.addData("zone", 2);
         }
         telemetry.update();
-        sleep(100000000); // might have to get rid of this
 
-        waitForStart();
-        MecanumDrive robot = new MecanumDrive(hardwareMap);
 
-        // MOVING CONE TO TERMINAL
+        slides.tozero();
+
+        robot.move(0, 0.5, 0);
+        sleep(200);
+        robot.move(0, 0, 0);
+        sleep(100);
         robot.move(-0.5, 0, 0);
-        sleep(1400);
+        sleep(side);
         robot.move(0, 0, 0);
-        robot.move(0, 0, -0.1);
-        sleep(10);
-        sleep(400);
+        sleep(100);
         robot.move(0.5, 0, 0);
-        sleep(1400);
-        robot.move(0, 0, 0);
-        sleep(400);
-
+        sleep(side);
         if (tagID == 4) {
+
             robot.move(-0.5,0,0);
             sleep(blueleft);
             robot.move(0,0,0);
             sleep(100);
+            robot.move(0, 0, 0.2);
+            sleep(bluerot);
             robot.move(0,0.5,0);
             sleep(blueforward);
             robot.move(0,0,0);
         }
 
         if (tagID == 5) {
-            robot.move(0.5,0,0);
-            sleep(yellowleft);
-            robot.move(0,0,0);
-            sleep(100);
             robot.move(0,0.5,0);
             sleep(yellowforward);
             robot.move(0,0,0);
@@ -158,14 +161,17 @@ public class AprilTag_Cone_LeftSymmetrical extends LinearOpMode {
             sleep(pinkright); //changed from 1450
             robot.move(0,0,0);
             sleep(100);
+            robot.move(0, 0, -0.2);
+            sleep(pinkrot);
             robot.move(0,0.5,0);
             sleep(pinkforward);
             robot.move(0,0,0);
         }
+
     }
 
     void detectTag() {
-        telemetry.addData("detecting", "arf");
+        telemetry.addData("detecting", "detecting");
         telemetry.update();
         // Calling getDetectionsUpdate() will only return an object if there was a new frame
         // processed since the last time we called it. Otherwise, it will return null. This

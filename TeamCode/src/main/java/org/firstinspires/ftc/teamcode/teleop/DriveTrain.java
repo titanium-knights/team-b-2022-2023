@@ -71,6 +71,9 @@ public class DriveTrain extends LinearOpMode {
                 presetactive = true;}
             if(gamepad1.dpad_up) {slide.middle();
                 presetactive = true;}
+            if (gamepad1.dpad_right) {slide.high();
+                presetactive = true;
+            }
             if (!slide.isBusy() && presetactive) {slide.stop();
                 presetactive = false;}
 
