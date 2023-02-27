@@ -23,7 +23,7 @@ public class Slides {
 
     //Preset heights,
     // TO DO: CALIBRATE
-    int maxheight = 12000;
+    int maxheight = 3481;
 
     int midheight = 2600;
     int lowheight = 1669;
@@ -58,7 +58,7 @@ public class Slides {
     }
 
     public void setPower(double power){
-        slideMotorL.setPower(-1*power); // constant removed
+        slideMotorL.setPower(-0.93*power); // constant removed
         slideMotorR.setPower(power);
     }
 
@@ -94,7 +94,7 @@ public class Slides {
     public void runToPosition(){
         slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        setPower(0.6);
+        setPower(0.9);
 
     }
     public void todrop(){
@@ -118,6 +118,12 @@ public class Slides {
 
     public void middle(){
         setTarget(midheight);
+        runToPosition();
+        Lpos = getEncoders()[0];
+        Rpos = getEncoders()[1];
+    }
+    public void high(){
+        setTarget(maxheight);
         runToPosition();
         Lpos = getEncoders()[0];
         Rpos = getEncoders()[1];
