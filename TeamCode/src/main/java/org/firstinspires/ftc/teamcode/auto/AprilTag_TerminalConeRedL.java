@@ -37,8 +37,8 @@ import org.firstinspires.ftc.teamcode.utilities.Slides;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="AprilTag_TerminalConeL")
-public class AprilTag_TerminalConeL extends LinearOpMode {
+@Autonomous(name="AprilTag_TerminalConeRedL")
+public class AprilTag_TerminalConeRedL extends LinearOpMode {
 
     public static int bluerot = 100;
     public static int blueleft = 1500;
@@ -50,7 +50,7 @@ public class AprilTag_TerminalConeL extends LinearOpMode {
     public static int pinkright = 1350;
     public static int pinkforward =1400;
 
-    public static int side = 1500;
+    public static int side = 1200;
 
 
     OpenCvCamera camera;
@@ -125,17 +125,17 @@ public class AprilTag_TerminalConeL extends LinearOpMode {
         telemetry.update();
 
 
-        slides.tozero();
+        slides.totrue();
 
         robot.move(0, 0.5, 0);
-        sleep(200);
-        robot.move(0, 0, 0);
-        sleep(100);
-        robot.move(0.5, 0, 0);
-        sleep(side);
+        sleep(150);
         robot.move(0, 0, 0);
         sleep(100);
         robot.move(-0.5, 0, 0);
+        sleep(side);
+        robot.move(0, 0, 0);
+        sleep(100);
+        robot.move(0.5, 0, 0);
         sleep(side);
         if (tagID == 4) {
 
@@ -148,9 +148,16 @@ public class AprilTag_TerminalConeL extends LinearOpMode {
             robot.move(0,0.5,0);
             sleep(blueforward);
             robot.move(0,0,0);
+            robot.move(-0.5, 0, 0);
+            sleep(300);
+            robot.move(0, 0, 0);
         }
 
         if (tagID == 5) {
+            robot.move(-0.5, 0, 0);
+            sleep(200);
+            robot.move(0, 0, 0);
+            sleep(100);
             robot.move(0,0.5,0);
             sleep(yellowforward);
             robot.move(0,0,0);

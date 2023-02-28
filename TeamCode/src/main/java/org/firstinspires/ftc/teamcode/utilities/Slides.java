@@ -25,9 +25,10 @@ public class Slides {
     // TO DO: CALIBRATE
     int maxheight = 3481;
 
-    int midheight = 2600;
-    int lowheight = 1669;
+    int midheight = 2424;
+    int lowheight = 1472;
     int dropheight = 800;
+
 
     public Slides(HardwareMap hmap){
         this.slideMotorL = hmap.dcMotor.get(CONFIG.SLIDEL);
@@ -58,7 +59,7 @@ public class Slides {
     }
 
     public void setPower(double power){
-        slideMotorL.setPower(-0.93*power); // constant removed
+        slideMotorL.setPower(-0.95*power); // constant removed
         slideMotorR.setPower(power);
     }
 
@@ -100,6 +101,13 @@ public class Slides {
     public void todrop(){
         setTarget(dropheight);
         runToPosition();
+    }
+
+    public void totrue(){
+        setTarget(0);
+        runToPosition();
+        Lpos = getEncoders()[0];
+        Rpos = getEncoders()[1];
     }
 
     public void tozero(){
