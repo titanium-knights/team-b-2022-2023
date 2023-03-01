@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.AprilTag;
 import org.firstinspires.ftc.teamcode.utilities.Slides;
 
 import com.acmerobotics.dashboard.config.Config;

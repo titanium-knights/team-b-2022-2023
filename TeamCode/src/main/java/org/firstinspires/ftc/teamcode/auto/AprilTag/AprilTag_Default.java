@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.AprilTag;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -47,7 +47,7 @@ public class AprilTag_Default extends LinearOpMode {
     public static int yellowforward = 1200;
 
     public static int pinkrot = 100;
-    public static int pinkright = 1350;
+    public static int pinkright = 1450;
     public static int pinkforward =1400;
 
 
@@ -123,14 +123,17 @@ public class AprilTag_Default extends LinearOpMode {
         telemetry.update();
 
 
-        slides.tozero();
+        slides.totrue();
 
         robot.move(0, 0.5, 0);
-        sleep(200);
+        sleep(100);
         robot.move(0, 0, 0);
         sleep(100);
         if (tagID == 4) {
-
+            robot.move(0, 0.5, 0);
+            sleep(100);
+            robot.move(0, 0, 0);
+            sleep(100);
             robot.move(-0.5,0,0);
             sleep(blueleft);
             robot.move(0,0,0);
@@ -140,6 +143,9 @@ public class AprilTag_Default extends LinearOpMode {
             robot.move(0,0.5,0);
             sleep(blueforward);
             robot.move(0,0,0);
+            robot.move(-0.5, 0, 0);
+            sleep(100);
+            robot.move(0, 0, 0);
         }
 
         if (tagID == 5) {

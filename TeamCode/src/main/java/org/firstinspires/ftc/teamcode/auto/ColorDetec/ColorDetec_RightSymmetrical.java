@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.ColorDetec;
 //PUSHED 1/6/23 5:35
 //ALIGN ROBOT WITH INNER BOTTOM CORNER
 //Auton starting on right side of the field
