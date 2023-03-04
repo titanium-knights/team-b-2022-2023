@@ -18,11 +18,13 @@ public class Claw {
     public double getRightPosition() {return clawServo_right.getPosition();}
 
     public void open(){
-        clawServo_left.setPosition(0);
+//        clawServo_left.setPosition(0);
+        clawServo_left.setPosition(0.2);
 //        clawServo_right.setPosition(0.95);
     }
     public void close(){
-        clawServo_left.setPosition(0.5);
+//        clawServo_left.setPosition(0.5);
+        clawServo_left.setPosition(0.8);
 //        clawServo_right.setPosition(0.86);
     }
 
