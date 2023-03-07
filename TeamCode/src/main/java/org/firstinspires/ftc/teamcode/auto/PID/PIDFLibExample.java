@@ -19,19 +19,6 @@ import com.acmerobotics.dashboard.config.Config;
 @Config
 @Autonomous(name="PIDFLibExample")
 public class PIDFLibExample extends LinearOpMode {
-    static final int DISTANCE = 2000;
-    public void PIDFVelocityControl(MotorEx m, PIDFController pidfController, String mName, int startPos) {
-        telemetry.addData(mName+" start pos", startPos);
-        telemetry.addData(mName+" current position", m.getCurrentPosition());
-        telemetry.update();
-        double output = pidfController.calculate(
-                m.getCurrentPosition()  // the measured value
-        );
-        telemetry.addData(mName + " velocity", output/4);
-        telemetry.update();
-        m.setVelocity(output/4);
-    }
-
     @Override
     public void runOpMode() {
         waitForStart();
