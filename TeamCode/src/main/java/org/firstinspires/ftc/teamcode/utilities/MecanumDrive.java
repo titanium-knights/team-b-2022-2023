@@ -43,7 +43,6 @@ public class MecanumDrive {
         double max = Math.max(1, Math.max(Math.max(Math.abs(dot_fl), Math.abs(dot_fr)), Math.max(Math.abs(dot_bl), Math.abs(dot_br))));
         fl.setPower(dot_fl / max);
         br.setPower(dot_br / max);
-
         fr.setPower(dot_fr / max);
         bl.setPower(dot_bl / max);
     }
