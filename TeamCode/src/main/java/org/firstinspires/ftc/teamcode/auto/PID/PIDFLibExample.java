@@ -22,12 +22,13 @@ import com.acmerobotics.dashboard.config.Config;
 @Autonomous(name="PIDFLibExample")
 public class PIDFLibExample extends LinearOpMode {
 
-    public static int pos1 = 0;
-    public static int pos2 = 2100;
-    public static int pos3 = 2700;
-    public static int pos4 = 2730;
-    public static int pos5 = 1530;
-    public static int pos6 = 2730;
+    public static int forwardPos = 2300;
+    public static int turnLeftPos = 3300;
+    public static int forward2Pos = 3750; // 500 dif
+
+    public static int forwardmulti = 4;
+
+    public static int rotationmulti = 1;
 
     public void moveForward(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
         // perform the control loop
@@ -50,72 +51,15 @@ public class PIDFLibExample extends LinearOpMode {
                     fr.getCurrentPosition()
             );
             output /= 4;
-            telemetry.addData("speed", output);
+            telemetry.addData("moveForward speed", output);
             telemetry.update();
             if(output<1000) {
                 break;
             }
 
-            output/=4;
+            output/=forwardmulti;
             br.setVelocity(output);
             fr.setVelocity(output);
-            fl.setVelocity(output);
-            bl.setVelocity(output);
-        }
-    }
-
-    public void moveBackward(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
-        // perform the control loop
-        /*
-         * The loop checks to see if the controller has reached
-         * the desired setpoint within a specified tolerance
-         * range
-         */
-        while (!pController.atSetPoint()) {
-            double output = pController.calculate(
-                    br.getCurrentPosition()  // the measured value
-            );
-            output += pController.calculate(
-                    fl.getCurrentPosition()
-            );
-            output += pController.calculate(
-                    bl.getCurrentPosition()
-            );
-            output += pController.calculate(
-                    fr.getCurrentPosition()
-            );
-            output /= 4;
-            if(output<1000) {
-                break;
-            }
-
-            output/=4;
-            telemetry.addData("speed", output);
-            telemetry.update();
-            br.setVelocity(output);
-            fr.setVelocity(output);
-            fl.setVelocity(output);
-            bl.setVelocity(output);
-        }
-    }
-
-    public void turnRight(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
-        while (!pController.atSetPoint()) {
-            double output = pController.calculate(
-                    fl.getCurrentPosition()
-            );
-            output += pController.calculate(
-                    bl.getCurrentPosition()
-            );;
-            output /= 2;
-            telemetry.addData("speed", output);
-            telemetry.update();
-            if(output<1000) {
-                break;
-            }
-
-            br.setVelocity(-output);
-            fr.setVelocity(-output);
             fl.setVelocity(output);
             bl.setVelocity(output);
         }
@@ -133,13 +77,57 @@ public class PIDFLibExample extends LinearOpMode {
             if (output<1000) {
                 break;
             }
-
-            telemetry.addData("turning speed", output);
+            output /= rotationmulti;
+            telemetry.addData("turnLeft speed", output);
             telemetry.update();
             br.setVelocity(output);
             fr.setVelocity(output);
             fl.setVelocity(-output);
             bl.setVelocity(-output);
+        }
+    }
+
+    public void strafeRight(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+        while (!pController.atSetPoint()) {
+            double output = pController.calculate(
+                    fl.getCurrentPosition()
+            );
+            output += pController.calculate(
+                    br.getCurrentPosition()
+            );
+            output /= 2;
+            if (output<1000) {
+                break;
+            }
+
+            telemetry.addData("strafeLeft speed", output);
+            telemetry.update();
+            br.setVelocity(output);
+            fr.setVelocity(-output);
+            fl.setVelocity(output);
+            bl.setVelocity(-output);
+        }
+    }
+
+    public void strafeLeft(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+        while (!pController.atSetPoint()) {
+            double output = pController.calculate(
+                    fr.getCurrentPosition()
+            );
+            output += pController.calculate(
+                    bl.getCurrentPosition()
+            );
+            output /= 2;
+            if (output<1000) {
+                break;
+            }
+
+            telemetry.addData("strafeRight speed", output);
+            telemetry.update();
+            br.setVelocity(-output);
+            fr.setVelocity(output);
+            fl.setVelocity(-output);
+            bl.setVelocity(output);
         }
     }
 
@@ -168,35 +156,20 @@ public class PIDFLibExample extends LinearOpMode {
         fl.resetEncoder();
 
         PController pController = new PController(10);
-//        int pos = 0;
 
-//        pos+=2100;
-        pController.setSetPoint(pos2);
+        pController.setSetPoint(forwardPos);
         moveForward(pController, br, fl, bl, fr);
 
         stop(br, fl, bl, fr);
 
-//        pos+=600;
-        pController.setSetPoint(pos3);
-        turnRight(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-//        pos+=30;
-        pController.setSetPoint(pos4);
-        moveForward(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-//        pos-=1200;
-        pController.setSetPoint(pos5);
-        moveBackward(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-//        pos+=1200;
-        pController.setSetPoint(pos6);
+        pController.setSetPoint(turnLeftPos);
         turnLeft(pController, br, fl, bl, fr);
+
+        stop(br, fl, bl, fr);
+        sleep(1000);
+
+        pController.setSetPoint(forward2Pos);
+        moveForward(pController, br, fl, bl, fr);
 
         stop(br, fl, bl, fr);
     }
