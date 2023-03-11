@@ -22,9 +22,13 @@ import com.acmerobotics.dashboard.config.Config;
 @Autonomous(name="PIDFLibExample")
 public class PIDFLibExample extends LinearOpMode {
 
-    public static int forwardPos = 2300;
-    public static int turnLeftPos = 3300;
-    public static int forward2Pos = 3750; // 500 dif
+    public static int forwardPos = 2325;
+
+    public static int strafeRightPos = 2725; // 400
+
+    public  static int strafeLeftPos = 3125; // 400
+    public static int turnLeftPos = 4125; // 1000
+    public static int forward2Pos = 4575; // 450
 
     public static int forwardmulti = 4;
 
@@ -146,6 +150,12 @@ public class PIDFLibExample extends LinearOpMode {
         MotorEx bl = new MotorEx(hardwareMap, CONFIG.BACKLEFT);
         MotorEx fr = new MotorEx(hardwareMap, CONFIG.FRONTRIGHT);
         MotorEx fl = new MotorEx(hardwareMap, CONFIG.FRONTLEFT);
+
+        br.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        fr.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        fl.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
         br.setInverted(false);
         fr.setInverted(false);
         bl.setInverted(true);
@@ -159,6 +169,16 @@ public class PIDFLibExample extends LinearOpMode {
 
         pController.setSetPoint(forwardPos);
         moveForward(pController, br, fl, bl, fr);
+
+        stop(br, fl, bl, fr);
+
+        pController.setSetPoint(strafeRightPos);
+        strafeRight(pController, br, fl, bl, fr);
+
+        stop(br, fl, bl, fr);
+
+        pController.setSetPoint(strafeLeftPos);
+        strafeLeft(pController, br, fl, bl, fr);
 
         stop(br, fl, bl, fr);
 
