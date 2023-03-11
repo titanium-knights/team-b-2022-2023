@@ -75,7 +75,7 @@ public class ColorDetec_Stack_RightSymmetrical extends LinearOpMode {
         sleep(200);
 
 
-        slides.todrop();
+        slides.toscan();
         while (slides.isBusy()) {
             continue;
         }

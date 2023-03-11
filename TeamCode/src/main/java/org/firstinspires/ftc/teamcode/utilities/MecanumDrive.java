@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.utilities;
 
 import static java.lang.Thread.sleep;
 
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class MecanumDrive {
-
+    public static DcMotor fl, fr, bl, br;
     public MecanumDrive(HardwareMap hmap) {
         fl = hmap.get(DcMotor.class, CONFIG.FRONTLEFT);
         fr = hmap.get(DcMotor.class, CONFIG.FRONTRIGHT);
@@ -22,13 +23,18 @@ public class MecanumDrive {
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         br.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         directions.put(fl, new double[]{1, 1});
         directions.put(fr, new double[]{1, -1});
         directions.put(bl, new double[]{1, -1});
         directions.put(br, new double[]{1, 1});
     }
 
-    public static DcMotor fl, fr, bl, br;
+
 
     public static HashMap<DcMotor, double[]> directions = new HashMap<>();
 

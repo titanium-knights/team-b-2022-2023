@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.AprilTag;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -80,7 +80,7 @@ public class AprilTag_TerminalConeR extends LinearOpMode {
         waitForStart();
         Slides slides = new Slides(hardwareMap);
         MecanumDrive robot = new MecanumDrive(hardwareMap);
-        slides.todrop();
+        slides.toscan();
         sleep(1000);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());

@@ -14,33 +14,83 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.utilities.CONFIG;
+import org.firstinspires.ftc.teamcode.utilities.Claw;
 import org.firstinspires.ftc.teamcode.utilities.MecanumDrive;
+import org.firstinspires.ftc.teamcode.utilities.Slides;
 
 import com.acmerobotics.dashboard.config.Config;
 
 @Config
 @Autonomous(name="PIDFLibExample")
 public class PIDFLibExample extends LinearOpMode {
-
-    public static int forwardPos = 2325;
-
-    public static int strafeRightPos = 2725; // 400
-
-    public  static int strafeLeftPos = 3125; // 400
-    public static int turnLeftPos = 4125; // 1000
-    public static int forward2Pos = 4575; // 450
+    public static int forwardPos = 2300;
+    public static int turnLeft = 600;
+    public static int forward2Pos = 500; // 500 dif
+    public static int strafeRight = 400;
 
     public static int forwardmulti = 4;
-
     public static int rotationmulti = 1;
 
-    public void moveForward(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+
+    public static MotorEx br, bl, fr, fl;
+    public static PController pController;
+
+    @Override
+    public void runOpMode() {
+        waitForStart();
+        MotorEx br = new MotorEx(hardwareMap, CONFIG.BACKRIGHT);
+        MotorEx bl = new MotorEx(hardwareMap, CONFIG.BACKLEFT);
+        MotorEx fr = new MotorEx(hardwareMap, CONFIG.FRONTRIGHT);
+        MotorEx fl = new MotorEx(hardwareMap, CONFIG.FRONTLEFT);
+        Slides slides = new Slides(hardwareMap);
+        Claw claw = new Claw(hardwareMap);
+        telemetry.setAutoClear(false);
+
+        br.setInverted(false);
+        fr.setInverted(false);
+        bl.setInverted(true);
+        fl.setInverted(true);
+        br.resetEncoder();
+        fr.resetEncoder();
+        bl.resetEncoder();
+        fl.resetEncoder();
+
+        pController = new PController(10);
+        pController.setTolerance(10);
+
+        waitForStart();
+
+        slides.reset();
+        claw.close();
+
+
+        moveForward(forwardPos);
+
+        strafeRight(strafeRight);
+
+        strafeLeft(strafeRight);
+
+        turnLeft(turnLeft);
+
+        moveForward(forward2Pos);
+
+        stop();
+    }
+
+    public void set(int dist){
+        pController.reset();
+        sleep(10);
+        pController.setSetPoint(dist);
+    }
+
+    public void moveForward(int dist) {
         // perform the control loop
         /*
          * The loop checks to see if the controller has reached
          * the desired setpoint within a specified tolerance
          * range
          */
+        set(dist);
         while (!pController.atSetPoint()) {
             double output = pController.calculate(
                     br.getCurrentPosition()  // the measured value
@@ -57,9 +107,6 @@ public class PIDFLibExample extends LinearOpMode {
             output /= 4;
             telemetry.addData("moveForward speed", output);
             telemetry.update();
-            if(output<1000) {
-                break;
-            }
 
             output/=forwardmulti;
             br.setVelocity(output);
@@ -67,9 +114,11 @@ public class PIDFLibExample extends LinearOpMode {
             fl.setVelocity(output);
             bl.setVelocity(output);
         }
+        brake();
     }
 
-    public void turnLeft(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+    public void turnLeft(int dist) {
+        set(dist);
         while (!pController.atSetPoint()) {
             double output = pController.calculate(
                     fr.getCurrentPosition()
@@ -78,9 +127,6 @@ public class PIDFLibExample extends LinearOpMode {
                     br.getCurrentPosition()
             );
             output /= 2;
-            if (output<1000) {
-                break;
-            }
             output /= rotationmulti;
             telemetry.addData("turnLeft speed", output);
             telemetry.update();
@@ -89,9 +135,11 @@ public class PIDFLibExample extends LinearOpMode {
             fl.setVelocity(-output);
             bl.setVelocity(-output);
         }
+        brake();
     }
 
-    public void strafeRight(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+    public void strafeRight(int dist) {
+        set(dist);
         while (!pController.atSetPoint()) {
             double output = pController.calculate(
                     fl.getCurrentPosition()
@@ -100,9 +148,6 @@ public class PIDFLibExample extends LinearOpMode {
                     br.getCurrentPosition()
             );
             output /= 2;
-            if (output<1000) {
-                break;
-            }
 
             telemetry.addData("strafeLeft speed", output);
             telemetry.update();
@@ -111,9 +156,11 @@ public class PIDFLibExample extends LinearOpMode {
             fl.setVelocity(output);
             bl.setVelocity(-output);
         }
+        brake();
     }
 
-    public void strafeLeft(PController pController, MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+    public void strafeLeft(int dist) {
+        set(dist);
         while (!pController.atSetPoint()) {
             double output = pController.calculate(
                     fr.getCurrentPosition()
@@ -122,9 +169,6 @@ public class PIDFLibExample extends LinearOpMode {
                     bl.getCurrentPosition()
             );
             output /= 2;
-            if (output<1000) {
-                break;
-            }
 
             telemetry.addData("strafeRight speed", output);
             telemetry.update();
@@ -133,9 +177,10 @@ public class PIDFLibExample extends LinearOpMode {
             fl.setVelocity(-output);
             bl.setVelocity(output);
         }
+        brake();
     }
 
-    public void stop(MotorEx br, MotorEx fl, MotorEx bl, MotorEx fr) {
+    public void brake() {
         br.stopMotor();
         fl.stopMotor();
         bl.stopMotor();
@@ -143,54 +188,5 @@ public class PIDFLibExample extends LinearOpMode {
         sleep(300);
     }
 
-    @Override
-    public void runOpMode() {
-        waitForStart();
-        MotorEx br = new MotorEx(hardwareMap, CONFIG.BACKRIGHT);
-        MotorEx bl = new MotorEx(hardwareMap, CONFIG.BACKLEFT);
-        MotorEx fr = new MotorEx(hardwareMap, CONFIG.FRONTRIGHT);
-        MotorEx fl = new MotorEx(hardwareMap, CONFIG.FRONTLEFT);
 
-        br.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-        bl.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-        fr.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-        fl.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-
-        br.setInverted(false);
-        fr.setInverted(false);
-        bl.setInverted(true);
-        fl.setInverted(true);
-        br.resetEncoder();
-        fr.resetEncoder();
-        bl.resetEncoder();
-        fl.resetEncoder();
-
-        PController pController = new PController(10);
-
-        pController.setSetPoint(forwardPos);
-        moveForward(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-        pController.setSetPoint(strafeRightPos);
-        strafeRight(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-        pController.setSetPoint(strafeLeftPos);
-        strafeLeft(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-
-        pController.setSetPoint(turnLeftPos);
-        turnLeft(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-        sleep(1000);
-
-        pController.setSetPoint(forward2Pos);
-        moveForward(pController, br, fl, bl, fr);
-
-        stop(br, fl, bl, fr);
-    }
 }

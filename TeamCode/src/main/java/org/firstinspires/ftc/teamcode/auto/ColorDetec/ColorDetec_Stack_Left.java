@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.AprilTag;
 //PUSHED 1/6/23 5:35
 //ALIGN ROBOT WITH INNER BOTTOM CORNER
 //Auton starting on left side of the field
@@ -77,7 +77,7 @@ public class ColorDetec_Stack_Left extends LinearOpMode {
         robot.move(0,0,0);
         sleep(200);
 
-        slides.todrop();
+        slides.toscan();
         while (slides.isBusy()) {
             continue;
         }

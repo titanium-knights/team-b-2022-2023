@@ -27,7 +27,7 @@ public class Slides {
 
     int midheight = 2600;
     int lowheight = 1669;
-    int dropheight = 800;
+    int scanheight = 800;
 
     public Slides(HardwareMap hmap){
         this.slideMotorL = hmap.dcMotor.get(CONFIG.SLIDEL);
@@ -97,8 +97,8 @@ public class Slides {
         setPower(0.9);
 
     }
-    public void todrop(){
-        setTarget(dropheight);
+    public void toscan(){
+        setTarget(scanheight);
         runToPosition();
     }
 
